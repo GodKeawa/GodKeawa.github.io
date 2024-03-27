@@ -1,0 +1,315 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>web-01 hexo框架 | GodKe's blog</title><meta name="author" content="GodKe"><meta name="copyright" content="GodKe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="hexo框架学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web-01 hexo框架">
+<meta property="og:url" content="https://godke.blog/2024/03/12/web-frame/index.html">
+<meta property="og:site_name" content="GodKe&#39;s blog">
+<meta property="og:description" content="hexo框架学习">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://picbed.godke.blog/img/bga.jpg">
+<meta property="article:published_time" content="2024-03-12T11:58:24.000Z">
+<meta property="article:modified_time" content="2024-03-24T11:16:03.839Z">
+<meta property="article:author" content="GodKe">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content="frame">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="pages">
+<meta property="article:tag" content="butterfly">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picbed.godke.blog/img/bga.jpg"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="canonical" href="https://godke.blog/2024/03/12/web-frame/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'web-01 hexo框架',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2024-03-24 19:16:03'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script src="https://npm.elemecdn.com/echarts@4.9.0/dist/echarts.min.js"></script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/progress_bar.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/cat.css"><link rel="stylesheet" href="/css/readPercent.css"><link rel="stylesheet" href="https://cdn1.tianli0.top/npm/element-ui@2.15.6/packages/theme-chalk/lib/index.css"><div id="myscoll"></div><svg aria-hidden="true" style="position:absolute; overflow:hidden; width:0; height:0"><symbol id="icon-sun" viewBox="0 0 1024 1024"><path d="M960 512l-128 128v192h-192l-128 128-128-128H192v-192l-128-128 128-128V192h192l128-128 128 128h192v192z" fill="#FFD878" p-id="8420"></path><path d="M736 512a224 224 0 1 0-448 0 224 224 0 1 0 448 0z" fill="#FFE4A9" p-id="8421"></path><path d="M512 109.248L626.752 224H800v173.248L914.752 512 800 626.752V800h-173.248L512 914.752 397.248 800H224v-173.248L109.248 512 224 397.248V224h173.248L512 109.248M512 64l-128 128H192v192l-128 128 128 128v192h192l128 128 128-128h192v-192l128-128-128-128V192h-192l-128-128z" fill="#4D5152" p-id="8422"></path><path d="M512 320c105.888 0 192 86.112 192 192s-86.112 192-192 192-192-86.112-192-192 86.112-192 192-192m0-32a224 224 0 1 0 0 448 224 224 0 0 0 0-448z" fill="#4D5152" p-id="8423"></path></symbol><symbol id="icon-moon" viewBox="0 0 1024 1024"><path d="M611.370667 167.082667a445.013333 445.013333 0 0 1-38.4 161.834666 477.824 477.824 0 0 1-244.736 244.394667 445.141333 445.141333 0 0 1-161.109334 38.058667 85.077333 85.077333 0 0 0-65.066666 135.722666A462.08 462.08 0 1 0 747.093333 102.058667a85.077333 85.077333 0 0 0-135.722666 65.024z" fill="#FFB531" p-id="11345"></path><path d="M329.728 274.133333l35.157333-35.157333a21.333333 21.333333 0 1 0-30.165333-30.165333l-35.157333 35.157333-35.114667-35.157333a21.333333 21.333333 0 0 0-30.165333 30.165333l35.114666 35.157333-35.114666 35.157334a21.333333 21.333333 0 1 0 30.165333 30.165333l35.114667-35.157333 35.157333 35.157333a21.333333 21.333333 0 1 0 30.165333-30.165333z" fill="#030835" p-id="11346"></path></symbol></svg><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.1.1"></head><body><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><div class="loading-img"></div><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="/css/progress_bg.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://picbed.godke.blog/img/ATRIhead.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/charts/"><i class="fa-fw fa fa-bar-chart"></i><span> 统计</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://picbed.godke.blog/img/bga.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="GodKe's blog"><img class="site-icon" src="/img/favicon.jpg"/><span class="site-name">GodKe's blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/charts/"><i class="fa-fw fa fa-bar-chart"></i><span> 统计</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-comment"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">web-01 hexo框架</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-03-12T11:58:24.000Z" title="Created 2024-03-12 19:58:24">2024-03-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-03-24T11:16:03.839Z" title="Updated 2024-03-24 19:16:03">2024-03-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/">网站搭建</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word Count:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading Time:</span><span>3mins</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="web-01 hexo框架"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="git学习"><a href="#git学习" class="headerlink" title="git学习"></a>git学习</h1><p>由于github是基于git的网站，所以熟练运用git是必不可少的<br>无论你使用什么框架，最后还是要用git上传和部署</p>
+<h1 id="hexo框架安装"><a href="#hexo框架安装" class="headerlink" title="hexo框架安装"></a>hexo框架安装</h1><p>考虑到与时俱进，直接去hexo官网看文档就行，反正也有中文<br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/index.html">文档 | Hexo</a></p>
+<ul>
+<li>注意前置安装node.js和附属的npm</li>
+</ul>
+<h1 id="hexo框架部署"><a href="#hexo框架部署" class="headerlink" title="hexo框架部署"></a>hexo框架部署</h1><h2 id="部署hexo"><a href="#部署hexo" class="headerlink" title="部署hexo"></a>部署hexo</h2><ul>
+<li>hexo作为一个框架可以非常方便地根据设计数据生成网站并上传到github</li>
+<li>应当将hexo视为一个生成器，可以为其安排一个repo，但是最好不要放在GitHub pages 的repo里，虽然可以指定一个branch生成页面，但是两个branch完全不同是违背git的初衷的，可以考虑为这个框架单独开一个repo</li>
+</ul>
+<p>依旧讲究与时俱进，看文档吧 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/setup">建站 | Hexo</a></p>
+<ul>
+<li>该文档内介绍了hexo框架下的部分文件夹的作用</li>
+</ul>
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><ul>
+<li>在电脑上挑个喜欢的位置，准备创建一个文件夹储存框架</li>
+<li>打开命令行，开始操作<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">跳转到目录位置</span></span><br><span class="line">cd &quot;&lt;file folder you&#x27;d like to put the folder in&gt;&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建工作目录</span></span><br><span class="line">hexo init &lt;folder&gt; # hexo初始化</span><br><span class="line">cd &lt;folder&gt;</span><br><span class="line">npm install # 安装npm</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="配置hexo"><a href="#配置hexo" class="headerlink" title="配置hexo"></a>配置hexo</h2><p><strong>可以自定义配置很多内容，这里只挑出现问题的讲</strong><br>本质上不用急着配置，到时候准备好设计网站的时候再一起配置<br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration">配置 | Hexo</a></p>
+<h3 id="配置网址"><a href="#配置网址" class="headerlink" title="配置网址"></a>配置网址</h3><blockquote>
+<p>众所周知的是github pages创建的静态网站域名有固定的设置，即<br>&lt;username&gt;.github.io<br>如果你想要分开部署多个网站，github并不提供三级域名，像<br>&lt;another name&gt;.&lt;username&gt;.github.io<br>而是通过域名下级目录的形式实现，即<br>&lt;username&gt;.github.io&#x2F;&lt;repo name&gt;</p>
+</blockquote>
+<ul>
+<li>如果我们依旧以最初仓库的方法部署这个项目仓库的github pages，将会导致css等文件无法读取，网页渲染只剩下字和链接，格式全没了；</li>
+<li>而且链接的格式也是错误的，当你点击链接时，会发现原本应该是<br>…&#x2F;&lt;repo name&gt;&#x2F;…&#x2F;index.html 的链接其实是<br>…&#x2F;…&#x2F;index.html，根本就没有到项目目录下寻找文件</li>
+</ul>
+<p>所以我们需要设置网址相关参数</p>
+<ul>
+<li>url: 改为指定的github pages的域名</li>
+<li>root: 可以不改，目的是解决网站没有部署在根目录上的问题</li>
+</ul>
+<h2 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h2><h3 id="方法1——npm-推荐"><a href="#方法1——npm-推荐" class="headerlink" title="方法1——npm(推荐)"></a>方法1——npm(推荐)</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-theme-butterfly</span><br></pre></td></tr></table></figure>
+<p>hexo的主题文件夹将被放在node_modules里</p>
+<h3 id="方法2——git"><a href="#方法2——git" class="headerlink" title="方法2——git"></a>方法2——git</h3><p><a target="_blank" rel="noopener" href="https://hexo.io/themes/">Themes | Hexo</a><br><strong>hexo的主题就放在框架目录的themes里面</strong><br>一般来说主题的发布者都会非常善良地让你一条命令解决问题<br>只需要呆在根目录，输入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone &lt;branch and url&gt; themes/&lt;name&gt;</span><br></pre></td></tr></table></figure>
+<p>如果要更新主题，进入主题的文件夹然后git pull即可</p>
+<p><strong>安装主题和下载文件没有本质区别，你可以下载多个主题一个一个尝试</strong><br>当你想要使用某个主题时，只要到hexo框架的_config.yml里修改theme参数即可<br>这个参数本质上是你下载到themes文件夹里的文件夹名，可以自己取名</p>
+<h3 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h3><p>在项目的根目录下复制一个butterfly的_config.yml文件并重命名为_config.butterfly.yml<br>框架将会优先读取根目录下的config,这样方便升级主题版本</p>
+<h1 id="hexo框架使用"><a href="#hexo框架使用" class="headerlink" title="hexo框架使用"></a>hexo框架使用</h1><p>现在终于可以开始创建第一个网站了，当然现在还只是部署在本地</p>
+<h2 id="开始写作"><a href="#开始写作" class="headerlink" title="开始写作"></a>开始写作</h2><p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/writing">写作 | Hexo</a><br>hexo写作本质上只是给md（或者其他格式的）文件添加了一些标识而已，在掌握了基本法则后你并没有太大必要调用命令行去生成一个文件再去修改，你可以自己创建文件然后写标识<br><strong>俗话说，条条大路通罗马，只要结果一样，怎么做是自己的自由</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">基本方法</span></span><br><span class="line">hexo new [layout] title</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">layout默认为post</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这个命令将会在相应的目录生成一个对应layout的文件</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">layout本质上就是指定scaffolds文件夹里的模板，这个模板我们可以自己设计</span></span><br></pre></td></tr></table></figure>
+<p><strong>不同的主题有不同的编写方式和显示逻辑，建议多看看主题的文档</strong></p>
+<h2 id="生成网页"><a href="#生成网页" class="headerlink" title="生成网页"></a>生成网页</h2><p>通过命令<code>hexo generate</code>或者<code>hexo g</code>生成网页</p>
+<h2 id="展示网页"><a href="#展示网页" class="headerlink" title="展示网页"></a>展示网页</h2><p>通过命令<code>hexo server</code>或<code>hexo s</code>启用本地服务器展示网页<br>默认的访问网址为<code>http://localhost:4000/</code>，ctrl+点击即可打开<br>当然当你[[web-01 框架学习#配置网址|配置了特殊网址]]时，这个网址也会随之变化</p>
+</article><div class="post-copyright"><div class="post-copyright__title"><span class="post-copyright-info"><h>web-01 hexo框架</h></span></div><div class="post-copyright__type"><span class="post-copyright-info"><a href="https://godke.blog/2024/03/12/web-frame/">https://godke.blog/2024/03/12/web-frame/</a></span></div><div class="post-copyright-m"><div class="post-copyright-m-info"><div class="post-copyright-a"><h>作者</h><div class="post-copyright-cc-info"><h>GodKe</h></div></div><div class="post-copyright-c"><h>发布于</h><div class="post-copyright-cc-info"><h>2024-03-12</h></div></div><div class="post-copyright-u"><h>更新于</h><div class="post-copyright-cc-info"><h>2024-03-24</h></div></div><div class="post-copyright-c"><h>许可协议</h><div class="post-copyright-cc-info"><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a rel="noopener" target="_blank" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></div></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/web/">web</a><a class="post-meta__tags" href="/tags/frame/">frame</a><a class="post-meta__tags" href="/tags/hexo/">hexo</a><a class="post-meta__tags" href="/tags/git/">git</a><a class="post-meta__tags" href="/tags/pages/">pages</a><a class="post-meta__tags" href="/tags/butterfly/">butterfly</a></div><div class="post_share"><div class="social-share" data-image="https://picbed.godke.blog/img/bga.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/03/14/web-deploy/" title="web-02 Github deploy"><img class="cover" src="https://picbed.godke.blog/img/bgb.jpg" onerror="onerror=null;src='https://picbed.godke.blog/img/404default.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">web-02 Github deploy</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/03/14/web-deploy/" title="web-02 Github deploy"><img class="cover" src="https://picbed.godke.blog/img/bgb.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">web-02 Github deploy</div></div></a></div><div><a href="/2024/03/16/web-design/" title="web-03 网页设计和魔改"><img class="cover" src="https://picbed.godke.blog/img/bgc.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-16</div><div class="title">web-03 网页设计和魔改</div></div></a></div><div><a href="/2024/03/25/web-maintain/" title="web-07 网站维护"><img class="cover" src="https://picbed.godke.blog/img/bgg.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-25</div><div class="title">web-07 网站维护</div></div></a></div><div><a href="/2024/03/23/web-network/" title="web-06 国内网络加速"><img class="cover" src="https://picbed.godke.blog/img/bgf.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-23</div><div class="title">web-06 国内网络加速</div></div></a></div><div><a href="/2024/03/20/web-comment/" title="web-04 评论区部署"><img class="cover" src="https://picbed.godke.blog/img/bgd.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-20</div><div class="title">web-04 评论区部署</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://picbed.godke.blog/img/ATRIhead.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">GodKe</div><div class="author-info__description">NOOB in FDU</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">24</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/GodKeawa"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/GodKeawa" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:3601262198@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://space.bilibili.com/393359317?spm_id_from=333.788.0.0" target="_blank" title="Bilibili"><i class="fab fa-bilibili" style="color: #1288e9;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">施工中</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#git%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">git学习</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo%E6%A1%86%E6%9E%B6%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">hexo框架安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo%E6%A1%86%E6%9E%B6%E9%83%A8%E7%BD%B2"><span class="toc-number">3.</span> <span class="toc-text">hexo框架部署</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2hexo"><span class="toc-number">3.1.</span> <span class="toc-text">部署hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">3.1.1.</span> <span class="toc-text">基本操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEhexo"><span class="toc-number">3.2.</span> <span class="toc-text">配置hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%BD%91%E5%9D%80"><span class="toc-number">3.2.1.</span> <span class="toc-text">配置网址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98"><span class="toc-number">3.3.</span> <span class="toc-text">安装主题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%951%E2%80%94%E2%80%94npm-%E6%8E%A8%E8%8D%90"><span class="toc-number">3.3.1.</span> <span class="toc-text">方法1——npm(推荐)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%952%E2%80%94%E2%80%94git"><span class="toc-number">3.3.2.</span> <span class="toc-text">方法2——git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E8%AE%AE"><span class="toc-number">3.3.3.</span> <span class="toc-text">建议</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">hexo框架使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E5%86%99%E4%BD%9C"><span class="toc-number">4.1.</span> <span class="toc-text">开始写作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E7%BD%91%E9%A1%B5"><span class="toc-number">4.2.</span> <span class="toc-text">生成网页</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%95%E7%A4%BA%E7%BD%91%E9%A1%B5"><span class="toc-number">4.3.</span> <span class="toc-text">展示网页</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/03/27/WSL00/" title="WSL-00 卷土重来"><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.3VYUGhMdzPrwioPwHjD9lAHaEK?rs=1&amp;pid=ImgDetMain" onerror="this.onerror=null;this.src='https://picbed.godke.blog/img/404default.jpg'" alt="WSL-00 卷土重来"/></a><div class="content"><a class="title" href="/2024/03/27/WSL00/" title="WSL-00 卷土重来">WSL-00 卷土重来</a><time datetime="2024-03-27T11:39:10.000Z" title="Created 2024-03-27 19:39:10">2024-03-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/27/WSLdied/" title="WSL似了"><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.WgPoHBDg3oH2JixZIWVWmwHaEK?rs=1&amp;pid=ImgDetMain" onerror="this.onerror=null;this.src='https://picbed.godke.blog/img/404default.jpg'" alt="WSL似了"/></a><div class="content"><a class="title" href="/2024/03/27/WSLdied/" title="WSL似了">WSL似了</a><time datetime="2024-03-27T11:23:39.000Z" title="Created 2024-03-27 19:23:39">2024-03-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/27/WSL01/" title="WSL-01 安装WSL和Ubuntu"><img src="https://logodix.com/logo/303737.jpg" onerror="this.onerror=null;this.src='https://picbed.godke.blog/img/404default.jpg'" alt="WSL-01 安装WSL和Ubuntu"/></a><div class="content"><a class="title" href="/2024/03/27/WSL01/" title="WSL-01 安装WSL和Ubuntu">WSL-01 安装WSL和Ubuntu</a><time datetime="2024-03-27T06:30:59.000Z" title="Created 2024-03-27 14:30:59">2024-03-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/25/web-maintain/" title="web-07 网站维护"><img src="https://picbed.godke.blog/img/bgg.jpg" onerror="this.onerror=null;this.src='https://picbed.godke.blog/img/404default.jpg'" alt="web-07 网站维护"/></a><div class="content"><a class="title" href="/2024/03/25/web-maintain/" title="web-07 网站维护">web-07 网站维护</a><time datetime="2024-03-25T08:22:31.000Z" title="Created 2024-03-25 16:22:31">2024-03-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/23/web-network/" title="web-06 国内网络加速"><img src="https://picbed.godke.blog/img/bgf.jpg" onerror="this.onerror=null;this.src='https://picbed.godke.blog/img/404default.jpg'" alt="web-06 国内网络加速"/></a><div class="content"><a class="title" href="/2024/03/23/web-network/" title="web-06 国内网络加速">web-06 国内网络加速</a><time datetime="2024-03-23T09:51:31.000Z" title="Created 2024-03-23 17:51:31">2024-03-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By GodKe</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><a class="icon-V hidden" onclick="switchNightMode()" title="Toggle Between Light And Dark Mode"><svg width="25" height="25" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon"></use></svg></a><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"><span id="percent">0<span>%</span></span></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.godke.blog',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.godke.blog',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else getScript('https://gcore.jsdelivr.net/npm/twikoo@1.6.32/dist/twikoo.all.min.js').then(init)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script defer src="https://npm.elemecdn.com/jquery@latest/dist/jquery.min.js"></script><div class="aplayer no-destroy" data-id="9512979254" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-autoplay="false"> </div><script defer data-pjax src="/js/cat.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer data-pjax src="/js/readPercent.js"></script><script src="/js/sun_moon.js" async></script><script async src="https://cdn1.tianli0.top/npm/vue@2.6.14/dist/vue.min.js"></script><script async src="https://cdn1.tianli0.top/npm/element-ui@2.15.6/lib/index.js"></script><script async src="/js/title.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v7.1.1" title=""><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v4.13.0" title=""><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.cloudflare-cn.com/" style="margin-inline:5px" data-title="本站采用cloudflare提供网络服务" title=""><img src="https://img.shields.io/badge/Network-Cloudflare-F6B85C?style=flat&amp;logo=Cloudflare" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title=""><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2024/03/27/WSLdied/" alt=""><img width="48" height="48" src="https://tse2-mm.cn.bing.net/th/id/OIP-C.WgPoHBDg3oH2JixZIWVWmwHaEK?rs=1&amp;pid=ImgDetMain" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-03-27</span><a class="blog-slider__title" href="2024/03/27/WSLdied/" alt="">WSL似了</a><div class="blog-slider__text">我的WSL是怎么彻底挂掉的</div><a class="blog-slider__button" href="2024/03/27/WSLdied/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2024/03/27/WSL01/" alt=""><img width="48" height="48" src="https://logodix.com/logo/303737.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-03-27</span><a class="blog-slider__title" href="2024/03/27/WSL01/" alt="">WSL-01 安装WSL和Ubuntu</a><div class="blog-slider__text">如何安装WSL和Ubuntu</div><a class="blog-slider__button" href="2024/03/27/WSL01/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2024/03/23/web-network/" alt=""><img width="48" height="48" src="https://picbed.godke.blog/img/bgf.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-03-23</span><a class="blog-slider__title" href="2024/03/23/web-network/" alt="">web-06 国内网络加速</a><div class="blog-slider__text">如何白嫖cloudflare实现国内访问加速</div><a class="blog-slider__button" href="2024/03/23/web-network/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2024/03/16/web-design/" alt=""><img width="48" height="48" src="https://picbed.godke.blog/img/bgc.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-03-16</span><a class="blog-slider__title" href="2024/03/16/web-design/" alt="">web-03 网页设计和魔改</a><div class="blog-slider__text">本网站的设计和魔改过程</div><a class="blog-slider__button" href="2024/03/16/web-design/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2024/03/27/WSL00/" alt=""><img width="48" height="48" src="https://tse4-mm.cn.bing.net/th/id/OIP-C.3VYUGhMdzPrwioPwHjD9lAHaEK?rs=1&amp;pid=ImgDetMain" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-03-27</span><a class="blog-slider__title" href="2024/03/27/WSL00/" alt="">WSL-00 卷土重来</a><div class="blog-slider__text">为什么要再次安装和配置WSL</div><a class="blog-slider__button" href="2024/03/27/WSL00/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2024/03/12/web-frame/" alt=""><img width="48" height="48" src="https://picbed.godke.blog/img/bga.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-03-12</span><a class="blog-slider__title" href="2024/03/12/web-frame/" alt="">web-01 hexo框架</a><div class="blog-slider__text">hexo框架学习</div><a class="blog-slider__button" href="2024/03/12/web-frame/" alt="">详情   </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><!-- hexo injector body_end end --></body></html>
