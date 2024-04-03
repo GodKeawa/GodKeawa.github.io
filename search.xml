@@ -4,6 +4,157 @@
   
     
     <entry>
+      <title>WSL-06 kali-linux相关</title>
+      <link href="/2024/04/02/WSL06/"/>
+      <url>/2024/04/02/WSL06/</url>
+      
+        <content type="html"><![CDATA[<h1 id="安装kali-linux"><a href="#安装kali-linux" class="headerlink" title="安装kali-linux"></a>安装kali-linux</h1><p>直接在WSL2上选择kali-linux安装即可</p><h1 id="安装图形界面"><a href="#安装图形界面" class="headerlink" title="安装图形界面"></a>安装图形界面</h1><p>不得不说kali因为图形界面的必要性比较大（渗透测试很多软件都是有图形界面的）<br>使得kali的图形化技术非常成熟</p><p>直接一键安装Win-KeX</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update &amp;&amp; sudo apt install kali-win-kex</span><br></pre></td></tr></table></figure><p>然后就能启动使用了</p><ul><li>因为kali的技术栈就是内置了一共vnc，所以还要给vnc设置个密码，随便设就行</li></ul><p>使用直接看官方docs<br><a href="https://www.kali.org/docs/wsl/win-kex/">Win-KeX | Kali Linux Documentation</a><br>一共三个模式</p><ul><li>window模式，就是相当于占满屏幕，对多屏幕友好，我就直接用这个，放在副屏上<ul><li>使用命令<code>kex --win -s</code></li></ul></li><li>增强模式，与Hyper-V类似，使用<code>RDP</code>获得功能更丰富的体验<ul><li>使用命令<code>kex --esm --ip -s</code></li></ul></li><li>无缝模式，类似于WSLg，将部分图形镶嵌到windows里，软件也可以直接在windows里打开，还是很推荐的，这样就不用再到windows上安装一次工具了<ul><li>使用命令<code>kex --sl -s</code></li></ul></li></ul><h1 id="安装工具包"><a href="#安装工具包" class="headerlink" title="安装工具包"></a>安装工具包</h1><p>WSL提供的kali是最小版本，很多工具都是没有安装的，可以选择安装一种</p><ul><li>安装标准工具包<ul><li><code>sudo apt install kali-linux-default</code></li></ul></li><li>安装完整工具包（非常大，建议先迁移）<ul><li><code>sudo apt install kali-linux-large</code></li></ul></li></ul><p>还有一个top10的工具包，太离谱就不用了，直接装标准就行，反正后续自己装</p><h1 id="配置声音"><a href="#配置声音" class="headerlink" title="配置声音"></a>配置声音</h1><p>kali自带播放器和声音相关包，只是初始可能不运行<br>目前的方案是</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">（1）在终端执行命令：systemctl --user <span class="built_in">enable</span> pulseaudio （似乎不运行也行，我的甚至没有systemctl）</span><br><span class="line"></span><br><span class="line">（2）在/etc/default/目录下，创建一个文件，命名为pulseaudio，并添加以下内容：</span><br><span class="line">PULSEAUDIO_SYSTEM_START=1</span><br><span class="line">DISALLOW_MODULE_LOADING=0</span><br></pre></td></tr></table></figure><p>重启系统，就有声音了<br>PS: 这声音系统时好时坏，配置应该是没问题，时不时dbus启动不了，不知道为什么，重启又能解决</p><h1 id="配置输入法"><a href="#配置输入法" class="headerlink" title="配置输入法"></a>配置输入法</h1><p><a href="https://blog.csdn.net/weixin_43681778/article/details/122562249">Kali Linux 安装配置中文输入法 Fcitx5_kali fcitx-CSDN博客</a><br>fcitx容易出bug，还是用fcitx5吧</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> WSL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> WSL </tag>
+            
+            <tag> kali </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>WSL-05 WSL迁移</title>
+      <link href="/2024/04/01/WSL05/"/>
+      <url>/2024/04/01/WSL05/</url>
+      
+        <content type="html"><![CDATA[<p><strong>WSL迁移不止是为了给C盘腾空间，也是为了方便进行备份</strong></p><h2 id="查看wsl状态"><a href="#查看wsl状态" class="headerlink" title="查看wsl状态"></a>查看wsl状态</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wsl -l -v</span><br><span class="line">如果Running运行状态，关掉它</span><br><span class="line">wsl --shutdown</span><br></pre></td></tr></table></figure><h2 id="导出系统镜像"><a href="#导出系统镜像" class="headerlink" title="导出系统镜像"></a>导出系统镜像</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --<span class="built_in">export</span> Ubuntu E:\Ubuntu\ubuntu.tar</span><br></pre></td></tr></table></figure><p>在路径下有了Ubuntu的压缩包，可以把这个压缩包备份，也可以直接导出到备份盘里，主文件并不受影响</p><h2 id="注销原有的linux系统"><a href="#注销原有的linux系统" class="headerlink" title="注销原有的linux系统"></a>注销原有的linux系统</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wsl --unregister Ubuntu</span><br><span class="line">可以再查看是否注销：</span><br><span class="line">wsl -l -v</span><br></pre></td></tr></table></figure><h2 id="导入系统"><a href="#导入系统" class="headerlink" title="导入系统"></a>导入系统</h2><p>wsl –import &lt;导入的Linux名称&gt; &lt;导入盘的路径&gt; &lt;ubuntu.tar的路径&gt; –version 2 (代表 wsl2)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --import Ubuntu E:\Ubuntu\ E:\Ubuntu\ubuntu.tar --version 2</span><br></pre></td></tr></table></figure><p>对比前面，路径下多了一个 ext4 映像文件</p><h2 id="修改默认用户"><a href="#修改默认用户" class="headerlink" title="修改默认用户"></a>修改默认用户</h2><p>打开wsl ubuntu之后，默认以root身份登录。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ubuntu.exe config --default-user &lt;你的用户名&gt;</span><br></pre></td></tr></table></figure><p>ubuntu.exe ：前面导入的时候没指定，所以这里用的默认ubuntu</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> WSL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Ubuntu </tag>
+            
+            <tag> WSL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>WSL-04 开发环境配置</title>
+      <link href="/2024/04/01/WSL04/"/>
+      <url>/2024/04/01/WSL04/</url>
+      
+        <content type="html"><![CDATA[<h1 id="编译环境"><a href="#编译环境" class="headerlink" title="编译环境"></a>编译环境</h1><p>实际上没有什么好配置的，Ubuntu天生就是拿来搞开发的<br>直接安装GNU工具链<br><code>sudo apt install binutils diffutils gcc gdb grep g++ make tar</code><br>其实就已经差不多了，只是要依赖自己在终端编译运行，习惯就好<br>python3现在ubuntu自带的都是3.10.12版本，而且是系统必备库</p><p>偶尔可能出现一些找不到程序的情况，大部分时候谷歌一下再做个软链接就行</p><p>然后就是配置一下VScode的插件，大部分都可以直接从windows迁移<br>VScode一些配置文件最好也设置一下，方便自定义<br><a href="https://blog.csdn.net/weixin_41823188/article/details/113530573">ubuntu下vscode编写C++环境配置，包括launch.json、tasks.json和c_cpp_properties.json文件说明</a><br>之后就可以在windows上进行快乐的远程开发了</p><h1 id="pwndbg"><a href="#pwndbg" class="headerlink" title="pwndbg"></a>pwndbg</h1><p>其实考虑了一下，发现这东西应该装在kali里,不过有一个还是挺好的<br>一个显著的优点就是可以查看各种更细节的东西了，比如汇编代码，栈和寄存器的内容，且是支持VScode读取的<br>未安装pwndbg的情况下，尝试打开寄存器选项会导致gdb直接崩溃</p><p>只要直接clone下来安装就行</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/pwndbg/pwndbg</span><br><span class="line"><span class="built_in">cd</span> pwndbg</span><br><span class="line">./setup.sh</span><br></pre></td></tr></table></figure><p>因为pwndbg是python的库，作为gdb的插件，所以安装时会顺便安装python的各种环境，属于是一举两得<br>配置好网络就是愉快的一键安装，防傻又好用</p><h1 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h1><ul><li>关于makefile的编写</li><li>关于Cmake的使用</li><li>控制台优化——tmux</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> WSL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Ubuntu </tag>
+            
+            <tag> vscode </tag>
+            
+            <tag> pwndbg </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>WSL-03 GUI界面</title>
+      <link href="/2024/03/29/WSL03/"/>
+      <url>/2024/03/29/WSL03/</url>
+      
+        <content type="html"><![CDATA[<h1 id="给WSL安装桌面"><a href="#给WSL安装桌面" class="headerlink" title="给WSL安装桌面"></a>给WSL安装桌面</h1><h2 id="踩坑经历"><a href="#踩坑经历" class="headerlink" title="踩坑经历"></a>踩坑经历</h2><p>网上还是有很多先辈尝试过的</p><h3 id="gnome桌面尝试"><a href="#gnome桌面尝试" class="headerlink" title="gnome桌面尝试"></a>gnome桌面尝试</h3><h4 id="X-server-技术栈"><a href="#X-server-技术栈" class="headerlink" title="X server  技术栈"></a>X server  技术栈</h4><p>目前来说最完整的是这篇文章<br><a href="https://blog.csdn.net/HackEle/article/details/122572418">Windows中WSL2 配置运行GNOME桌面版 Ubuntu-CSDN博客</a><br>但是时隔几年，WSL2变了很多</p><ul><li>基本流程不变，apt-fast可以不安装</li><li>主要安装两个包<code>ubuntu-desktop和gnome</code>，<code>gnome-session</code>大概率是包含的</li><li>在安装包之前要进行一个操作，还有一些可能的问题要处理<ul><li>见<a href="https://blog.csdn.net/qq_30448087/article/details/134897586">WSL2 Ubuntu22.04安装KDE桌面_setting up acpi-support (0.144) … failed to retr-CSDN博客</a></li></ul></li><li>VcXsrv照常配置</li></ul><p>最主要的变化就是图像输出地址的变化<br>在目前的绝大部分博客中都是写的</p><blockquote><p>在.bashrc文件末尾写入：<br>export DISPLAY&#x3D;$(cat &#x2F;etc&#x2F;resolv.conf | grep nameserver | awk ‘{print $2}’):0<br>export LIBGL_ALWAYS_INDIRECT&#x3D;1</p></blockquote><p>这个DISPLAY的地址和配置代理的地址是一样的，后面的:0是控制几号屏幕和几号窗口的<br>其实最后面的东西根本没必要看别人说怎么配置，自己打开VcXsrv，就能看到标题里有<br><img src="https://picbed.godke.blog/img/20240403191620.png" alt="image.png"><br>所以直接用-1（让软件自己选择），然后地址上配0.0就行</p><p>而前面的ip地址有很多说法，包括</p><ul><li>上面的说法，即Ubuntu的namesever地址</li><li>本机（windows）的ipv4地址</li><li>Ubuntu的ipv4虚拟地址</li></ul><p>然而实际上这些地址都有问题，在新的Ubuntu里因为WSLg的存在，绝大部分情况下输出图像都被WSLg承接了<br>可以使用测试程序<code>xeyes</code>,就会发现眼睛出现在独立窗口里，而不是VcXsrc里</p><p>经过本人的多次尝试，事实上DISPLAY地址应该是<code>localhost:0.0</code><br>在这样的情况下，只要这一行，便可以实现将图像输出到VcXsrc</p><p>然后就是各种bug，最好的情况也就是能打开桌面然后动一动了，终端都是打不开的<br>这里踩了超多坑，虽然有记录但是已经没意义了，因为未来大概率不支持了<br><a href="https://www.linuxmi.com/gnome-towards-dropping-x11.html">GNOME 正在采取措施逐步放弃 X11 - Linux迷 (linuxmi.com)</a><br>而这条技术栈完全依赖于X11，走不远就不走了</p><h4 id="vnc-技术栈"><a href="#vnc-技术栈" class="headerlink" title="vnc 技术栈"></a>vnc 技术栈</h4><p>大差不差，用xrdp来实现远程控制<br><a href="https://blog.csdn.net/flr_0831/article/details/123970357">Windows10 WSL2 安装Ubuntu并使用图形化界面_wsl2 ubuntu图形界面-CSDN博客</a><br>问题和X server技术栈如出一辙</p><ul><li>要么没图像，要么直接报错</li><li>性能还不好</li></ul><h3 id="KDE尝试"><a href="#KDE尝试" class="headerlink" title="KDE尝试"></a>KDE尝试</h3><p>很少有人玩这个，我只是尝试了一下，问题一堆，还是快跑吧<br><a href="https://blog.csdn.net/qq_30448087/article/details/134897586">WSL2 Ubuntu22.04安装KDE桌面_setting up acpi-support (0.144) … failed to retr-CSDN博客</a></p><h3 id="xfce4尝试"><a href="#xfce4尝试" class="headerlink" title="xfce4尝试"></a>xfce4尝试</h3><p>问题不多，效果拉跨，不如没有<br>目前网上大部分人都是跑的xfce4，因为简单防傻，没多大作用<br><a href="https://zhuanlan.zhihu.com/p/436441212">win11系统通过WSL&#x2F;WSL2安装ubuntu，开启图形桌面 - 知乎 (zhihu.com)</a><br>VcXsrc和xrdp的技术栈目前来说都还行，但是太丑了</p><h2 id="最终方案"><a href="#最终方案" class="headerlink" title="最终方案"></a>最终方案</h2><blockquote><p>装个锤锤gui，就一开发环境，还是远程开发，又不是kali，为什么需要桌面</p></blockquote><p>直接使用微软的WSLg方案<br><a href="https://learn.microsoft.com/zh-cn/windows/wsl/tutorials/gui-apps">使用 WSL 运行 Linux GUI 应用 | Microsoft Learn</a></p><ul><li>大部分都装上最好，没有GIMP倒是问题不大，只是编辑不了图片</li><li>VLC必装，不然没有媒体播放器，声音支持似乎也靠它</li><li>Nautilus就是文件管理器，可以直接通过WSLg打开，非常方便<ul><li>就是会产生一些莫名的报错，目前不是很影响使用，其实直接用vscode进行文件管理最好，只是有权限问题，不过大部分系统文件最好还是到终端用nano改</li></ul></li></ul><p>另外可以安装包管理器<br><a href="https://zhuanlan.zhihu.com/p/150879173">在 Ubuntu 中使用轻量的 Apt 软件包管理器 Synaptic | Linux 中国 - 知乎 (zhihu.com)</a></p><p>目前来说Ubuntu不是很适合搞GUI界面，要GUI还是看后面的kali-linux吧</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> WSL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Ubuntu </tag>
+            
+            <tag> WSL </tag>
+            
+            <tag> gnome </tag>
+            
+            <tag> KDE </tag>
+            
+            <tag> vnc </tag>
+            
+            <tag> WSLg </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>WSL-02 配置网络代理和远程访问</title>
+      <link href="/2024/03/28/WSL02/"/>
+      <url>/2024/03/28/WSL02/</url>
+      
+        <content type="html"><![CDATA[<h1 id="配置VScode进行远程开发"><a href="#配置VScode进行远程开发" class="headerlink" title="配置VScode进行远程开发"></a>配置VScode进行远程开发</h1><p>现在的Ubuntu就是一个精简的系统，里面几乎什么都没有，也没有GUI，用控制台进行后续操作十分麻烦，所以应该趁早用上VScode的远程开发<br>微软的官方教程非常详细<a href="https://learn.microsoft.com/zh-cn/windows/wsl/tutorials/wsl-vscode">开始通过 WSL 使用 VS Code | Microsoft Learn</a></p><ul><li>直接打开VScode，搜索插件Remote Development<ul><li>这个插件包包含4个插件，即装即用，十分方便</li></ul></li><li>这时有两种启动服务的方法<ul><li>一种是在Ubuntu控制台使用命令<code>code .</code>，这将会以当前目录为根目录打开一个VScode工作区<ul><li>但是这有一个很大的问题就是跨平台网络代理还没实现，大概率卡住且毫无办法</li></ul></li><li>另一种是在VScode的侧边栏或下面找到连接到远程的选项<ul><li>点击WSL对象，应该就能看到自己安装的Ubuntu，点击连接即可</li><li>VScode会把sever文件写入Ubuntu中，所以使用的是主机的网络，不会卡</li></ul></li></ul></li><li>现在就可以使用VScode管理和编写文件了，当然现在还会有诸多权限问题</li></ul><h1 id="处理网络问题"><a href="#处理网络问题" class="headerlink" title="处理网络问题"></a>处理网络问题</h1><p>Ubuntu的软件包自然都是在国外的，国内只有镜像而已</p><ul><li>你可以选择简单地将下载源切换成镜像来完成基本的apt包下载（但也不保证一定不出错）<br>只需要依次输入命令<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak  # 给旧源做一个备份</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">通过字符替换切换成中科大的镜像源，也可以去找别的源</span></span><br><span class="line">sudo sed -i &#x27;s@//.*archive.ubuntu.com@//mirrors.ustc.edu.cn@g&#x27; /etc/apt/sources.list  </span><br><span class="line">sudo apt update # 更新状态，让源生效</span><br></pre></td></tr></table></figure></li><li>这样做可以实现大部分apt包的正常下载</li><li>但是如果要使用git，浏览器访问外网之类的就毫无办法了</li></ul><p>在ICS课程里我就是只换了源，但显然这不是长久之计，所以这次得把网络代理处理好</p><h3 id="WSL1-和-WSL2-网络的区别"><a href="#WSL1-和-WSL2-网络的区别" class="headerlink" title="WSL1 和 WSL2 网络的区别"></a>WSL1 和 WSL2 网络的区别</h3><p>在 WSL1 时代，由于 Linux 子系统和 Windows 共享了网络端口，所以访问 Windows 的代理非常简单。例如 Windows 的代理客户端监听了 8000 端口，那么只需要在 Linux 子系统中执行如下命令，就可以让当前 session 中的请求通过代理访问互联网。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export ALL_PROXY=&quot;http://127.0.0.1:8000&quot;</span><br></pre></td></tr></table></figure><p>但是 WSL2 基于 Hyper-V 运行，导致 Linux 子系统和 Windows 在网络上是两台各自独立的机器，从 Linux 子系统访问 Windows 首先需要找到 Windows 的 IP。</p><h3 id="配置-WSL2-访问-Windows-上的代理"><a href="#配置-WSL2-访问-Windows-上的代理" class="headerlink" title="配置 WSL2 访问 Windows 上的代理"></a>配置 WSL2 访问 Windows 上的代理</h3><p>有两个关键步骤：</p><ol><li>WSL2 中配置的代理要指向 Windows 的 IP；</li><li>Windows 上的代理客户端需要允许来自本地局域网的请求； 由于 Linux 子系统也是通过 Windows 访问网络，所以 Linux 子系统中的网关指向的是 Windows，DNS 服务器指向的也是 Windows，基于这两个特性，我们可以将 Windows 的 IP 读取出来。 例如，在 Ubuntu 子系统中，通过 <code>cat /etc/resolv.conf</code> 查看 DNS 服务器 IP。</li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># This file was automatically generated by WSL. To stop automatic generation of this file, add the following entry to /etc/wsl.conf:</span><br><span class="line"># [network]</span><br><span class="line"># generateResolvConf = false</span><br><span class="line">nameserver 172.25.144.1</span><br></pre></td></tr></table></figure><p>可以看到 DNS 服务器是 <code>172.19.80.1</code>，通过环境变量 <code>ALL_PROXY</code> 配置代理：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export ALL_PROXY=&quot;http://172.25.144.1:7890&quot;</span><br></pre></td></tr></table></figure><p>7890 是 Windows 上运行的代理客户端的端口，记得要在 Windows 代理客户端上配置允许本地局域网请求。<br><img src="https://picbed.godke.blog/img/20240331161946.png"></p><h3 id="一键配置"><a href="#一键配置" class="headerlink" title="一键配置"></a>一键配置</h3><p><strong>在最新版本的WSL和Ubuntu下系统会自动配置代理</strong><br>将上面的过程写入用户文件夹下的<code>.bashrc</code>文件，就可以轻松的实现在启动bash时一键配置代理：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># for clash </span><br><span class="line">hostip=$(cat /etc/resolv.conf |grep -oP &#x27;(?%3C=nameserver\ ).*&#x27;)</span><br><span class="line">export https_proxy=&quot;http://$&#123;hostip&#125;:7890&quot;</span><br><span class="line">export http_proxy=&quot;http://$&#123;hostip&#125;:7890&quot;</span><br><span class="line">export all_proxy=&quot;socks5://$&#123;hostip&#125;:7890&quot;</span><br></pre></td></tr></table></figure><p>代码通过 <code>cat /etc/resolv.conf</code> 来获取 DNS 服务器，也就是 Windows 的 IP，再将其中的 IP 部分截取出来，加上代理客户端的端口（我的是 7890，可以根据自己实际情况修改），使用 export 写入环境变量中。</p><p>每次启动WSL前都开启代理即可实现对WSL的全局代理（国内网络几乎没有价值）<br>可以看到使用官方源速率也非常可观<br><img src="https://picbed.godke.blog/img/20240331162554.png" alt="image.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> WSL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Ubuntu </tag>
+            
+            <tag> WSL </tag>
+            
+            <tag> Clash </tag>
+            
+            <tag> vscode </tag>
+            
+            <tag> ssh </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>What Is College For</title>
       <link href="/2024/03/28/college2/"/>
       <url>/2024/03/28/college2/</url>
@@ -118,6 +269,31 @@
     
     
     <entry>
+      <title>系统环境变量配置不生效</title>
+      <link href="/2024/03/28/patherror/"/>
+      <url>/2024/03/28/patherror/</url>
+      
+        <content type="html"><![CDATA[<p><strong>重启解决99%的问题</strong></p><p>非常值得吐槽的是系统环境变量竟然就存储在一个文件里<br>在powershell里使用命令<code>$env:Path</code>即可查看文件内容<br>你甚至可以通过命令<code>$env:Path += &quot;;&lt;路径&gt;&quot;</code>来实现对path的增加(<strong>并不全局，见下文</strong>)</p><p>既然是文件，就会有一个很蛋疼的地方<br>    ——对单个软件（或者其他使用path的程序）来说不实时更新</p><p>比如说你打开了一个软件，这个软件需要你把某个路径加入path，这样软件才能正确调用</p><ul><li>首先你运行软件，发现报错了，显示找不到可执行文件</li><li>然后你去搜了一下，发现是某个东西没加进path，软件检索不到</li><li>于是你更改了path，但是没有重启软件，再次运行，还是检索不到</li><li>这是因为软件启动时已经将path文件读入了，且不会故意再去读</li><li>所以重启软件就能解决</li></ul><p>但是更为惊喜的是我遇到的情况</p><ul><li>众所周知一些软件是可以唤出powershell的，比如我用的github desktop</li><li>原本我认为powershell是单独的软件，启动时应该是自行初始化的</li><li>但事实是，如果你不重启github desktop,无论你重启多少次powershell，这个powershell就是不更新path，甚至你调用<code>$env:Path</code>方法读取到的内容也没有更新</li><li>也就是说，由软件唤起的powershell会继承软件的一部分数据，包括读取到的path</li><li>而<code>$env:Path</code>方法并不是读取全局的path</li></ul><p><strong>经过一些调查可以发现</strong><br>在 Windows 上，环境变量可以在三个作用域内定义：</p><ul><li>计算机（或系统）作用域</li><li>用户范围</li><li>流程范围</li></ul><p><em>Process</em> 作用域包含当前进程或 PowerShell 会话中可用的环境变量。 该变量列表<strong>继承自父进程</strong>，并由 <em>Machine</em> 和 <em>User</em> 作用域中的变量构造而成。</p><p><strong>在 PowerShell 中更改环境变量时，更改仅影响当前会话</strong>。 此行为类似于 Windows 命令外壳中的 <code>set</code> 命令和基于 UNIX 的环境中的 <code>setenv</code> 命令的行为。 要更改 Machine 或 User 作用域中的值，必须使用 <strong>System.Environment</strong> 类的方法。</p><p>要更改计算机作用域的变量，还必须拥有相应权限。 如果你尝试在没有足够权限的情况下更改值，该命令将失败并且 PowerShell 将显示错误。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术杂谈 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> path </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Why Men Fail</title>
       <link href="/2024/03/28/whymanfail/"/>
       <url>/2024/03/28/whymanfail/</url>
@@ -151,7 +327,7 @@
       <link href="/2024/03/27/WSL01/"/>
       <url>/2024/03/27/WSL01/</url>
       
-        <content type="html"><![CDATA[<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>由于WSL2使用hyper-v的问题目前还没有解决，所以本人使用了一条新的道路</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">管理员模式下输入</span></span><br><span class="line">Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">切换WSL版本到1</span></span><br><span class="line">wsl --set-default-version 1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">后续治好了WSL2就可以再次转换到WSL2</span></span><br><span class="line">wsl --set-version &lt;发行版名称&gt; 2</span><br></pre></td></tr></table></figure><h1 id="关于WSL"><a href="#关于WSL" class="headerlink" title="关于WSL"></a>关于WSL</h1><p><a href="https://learn.microsoft.com/zh-cn/windows/wsl/">适用于 Linux 的 Windows 子系统文档 | Microsoft Learn</a><br>作为微软的产品，当然是直接去看文档啦</p><h1 id="安装WSL和Ubuntu"><a href="#安装WSL和Ubuntu" class="headerlink" title="安装WSL和Ubuntu"></a>安装WSL和Ubuntu</h1><ul><li><p>如果你的windows系统“紧跟潮流”的话，就可以舒服地享受一键安装的快乐，只需要在powershell使用命令<code>wsl --install</code>即可</p></li><li><p>如果发现命令无效，那就只能玩硬核的了<br><a href="https://learn.microsoft.com/zh-cn/windows/wsl/install-manual">旧版 WSL 的手动安装步骤 | Microsoft Learn</a></p></li><li><p>当然也不可能完全一帆风顺，你大天朝的网络总是“值得信赖”的<br><img src="https://picbed.godke.blog/img/20240327144550.png" alt="image.png"></p></li><li><p>我故意没开代理，果然卡了，所以记得保持代理开着</p></li><li><p>安装完成后会让你对Ubuntu进行初始化设置</p><ul><li>首先输入用户名，和windows性质一样，但是一定要用小写字母和数字，且最好字母开头<ul><li>其他的形式可能造成未知bug</li></ul></li><li>然后输入密码，这是你以后sudo要用的，</li><li>最好重复输入密码，初始化完成</li></ul></li></ul><p>现在已经成功进入到Ubuntu了，也可以在终端为Ubuntu单开一个专属于Ubuntu的控制台<br><img src="https://picbed.godke.blog/img/20240327145006.png" alt="image.png"></p><h1 id="配置VScode进行远程开发"><a href="#配置VScode进行远程开发" class="headerlink" title="配置VScode进行远程开发"></a>配置VScode进行远程开发</h1><p>现在的Ubuntu就是一个精简的系统，里面几乎什么都没有，也没有GUI，用控制台进行后续操作十分麻烦，所以应该趁早用上VScode的远程开发<br>微软的官方教程非常详细<a href="https://learn.microsoft.com/zh-cn/windows/wsl/tutorials/wsl-vscode">开始通过 WSL 使用 VS Code | Microsoft Learn</a></p><ul><li>直接打开VScode，搜索插件Remote Development<ul><li>这个插件包包含4个插件，即装即用，十分方便</li></ul></li><li>这时有两种启动服务的方法<ul><li>一种是在Ubuntu控制台使用命令<code>code .</code>，这将会以当前目录为根目录打开一个VScode工作区<ul><li>但是这有一个很大的问题就是跨平台网络代理还没实现，大概率卡住且毫无办法</li></ul></li><li>另一种是在VScode的侧边栏或下面找到连接到远程的选项<ul><li>点击WSL对象，应该就能看到自己安装的Ubuntu，点击连接即可</li><li>VScode会把sever文件写入Ubuntu中，所以使用的是主机的网络，不会卡</li></ul></li></ul></li><li>现在就可以使用VScode管理和编写文件了，当然现在还会有诸多权限问题</li></ul><h1 id="处理网络问题"><a href="#处理网络问题" class="headerlink" title="处理网络问题"></a>处理网络问题</h1><p>Ubuntu的软件包自然都是在国外的，国内只有镜像而已</p><ul><li>你可以选择简单地将下载源切换成镜像来完成基本的apt包下载（但也不保证一定不出错）<br>只需要依次输入命令<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak  # 给旧源做一个备份</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">通过字符替换切换成中科大的镜像源，也可以去找别的源</span></span><br><span class="line">sudo sed -i &#x27;s@//.*archive.ubuntu.com@//mirrors.ustc.edu.cn@g&#x27; /etc/apt/sources.list  </span><br><span class="line">sudo apt update # 更新状态，让源生效</span><br></pre></td></tr></table></figure></li><li>这样做可以实现大部分apt包的正常下载</li><li>但是如果要使用git，浏览器访问外网之类的就毫无办法了</li></ul><p>在ICS课程里我就是只换了源，但显然这不是长久之计，所以这次得把网络代理处理好</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>由于WSL2使用hyper-v的问题目前还没有解决，所以本人使用了一条新的道路</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">管理员模式下输入</span></span><br><span class="line">Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">切换WSL版本到1</span></span><br><span class="line">wsl --set-default-version 1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">后续治好了WSL2就可以再次转换到WSL2</span></span><br><span class="line">wsl --set-version &lt;发行版名称&gt; 2</span><br></pre></td></tr></table></figure><h1 id="WSL堂堂复活"><a href="#WSL堂堂复活" class="headerlink" title="WSL堂堂复活"></a>WSL堂堂复活</h1><p>这次直接使用狠活，把网络的所有设置重置了，将VMware的毒完全刮尽<br>这时候想要去重新开启hyper-v，却发现在windows功能里没有hyper-v选项<br>看了看似乎是专业版才有，家庭版不让设置</p><p>使用脚本强制安装hyper-v功能<br>在文本中写入以下代码，再将扩展名改成cmd或bat运行</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pushd &quot;%~dp0&quot;</span><br><span class="line"></span><br><span class="line">dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum &gt;hyper-v.txt</span><br><span class="line"></span><br><span class="line">for /f %%i in (&#x27;findstr /i . hyper-v.txt 2^&gt;nul&#x27;) do dism /online /norestart /add-package:&quot;%SystemRoot%\servicing\Packages\%%i&quot;</span><br><span class="line"></span><br><span class="line">del hyper-v.txt</span><br><span class="line"></span><br><span class="line">Dism /online /enable-feature /featurename:Microsoft-Hyper-V-All /LimitAccess /ALL</span><br></pre></td></tr></table></figure><p>需要安装一段时间，安装完成后就能发现windows服务里有hyper-v和wsl了<br>先把两个功能都关闭，重启，把所有设置重置</p><p>再打开两个功能，重启，现在电脑就像没碰过VMware一样<br>又可以愉快地安装WSL2了</p><p><strong>PS: 一劳永逸，直接重装，痛失GitHub 2FA认证码</strong></p><h1 id="关于WSL"><a href="#关于WSL" class="headerlink" title="关于WSL"></a>关于WSL</h1><p><a href="https://learn.microsoft.com/zh-cn/windows/wsl/">适用于 Linux 的 Windows 子系统文档 | Microsoft Learn</a><br>作为微软的产品，当然是直接去看文档啦</p><h1 id="安装WSL和Ubuntu"><a href="#安装WSL和Ubuntu" class="headerlink" title="安装WSL和Ubuntu"></a>安装WSL和Ubuntu</h1><ul><li><p>如果你的windows系统“紧跟潮流”的话，就可以舒服地享受一键安装的快乐，只需要在powershell使用命令<code>wsl --install</code>即可</p></li><li><p>如果发现命令无效，那就只能玩硬核的了<br><a href="https://learn.microsoft.com/zh-cn/windows/wsl/install-manual">旧版 WSL 的手动安装步骤 | Microsoft Learn</a></p></li><li><p>当然也不可能完全一帆风顺，你大天朝的网络总是“值得信赖”的<br><img src="https://picbed.godke.blog/img/20240327144550.png" alt="image.png"></p></li><li><p>我故意没开代理，果然卡了，所以记得保持代理开着</p></li><li><p>安装完成后会让你对Ubuntu进行初始化设置</p><ul><li>首先输入用户名，和windows性质一样，但是一定要用小写字母和数字，且最好字母开头<ul><li>其他的形式可能造成未知bug</li></ul></li><li>然后输入密码，这是你以后sudo要用的，</li><li>最好重复输入密码，初始化完成</li></ul></li></ul><p>现在已经成功进入到Ubuntu了，也可以在终端为Ubuntu单开一个专属于Ubuntu的控制台<br><img src="https://picbed.godke.blog/img/20240327145006.png" alt="image.png"></p>]]></content>
       
       
       <categories>
@@ -163,9 +339,9 @@
       
         <tags>
             
-            <tag> WSL </tag>
-            
             <tag> Ubuntu </tag>
+            
+            <tag> WSL </tag>
             
         </tags>
       
@@ -190,9 +366,9 @@
       
         <tags>
             
-            <tag> WSL </tag>
-            
             <tag> Ubuntu </tag>
+            
+            <tag> WSL </tag>
             
             <tag> Clash </tag>
             
@@ -221,9 +397,9 @@
       
         <tags>
             
-            <tag> WSL </tag>
-            
             <tag> Ubuntu </tag>
+            
+            <tag> WSL </tag>
             
             <tag> hyper-v </tag>
             
@@ -354,6 +530,33 @@
             <tag> gmail </tag>
             
             <tag> mongodb </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>如何调试微信中的网页</title>
+      <link href="/2024/03/20/WeChat-inspect/"/>
+      <url>/2024/03/20/WeChat-inspect/</url>
+      
+        <content type="html"><![CDATA[<h1 id="导言"><a href="#导言" class="headerlink" title="导言"></a>导言</h1><blockquote><p>众所周知，微信作为一款优秀的国产app，以其离谱的大小著称，且不谈其内置的输入法有多么的离谱，仅仅是微信内置的浏览器就已经技惊四座，作为一个使用CEF(<a href="https://www.chromium.org/Home">Chromium Embedded Framework (CEF)</a> 是一个基于Google Chromium的开源项目)的软件，它<strong>为了减少客户对微信体积过大的怨恨，<em>善良</em>地将浏览器内置的调试工具删除了</strong>，导致我们无法对微信内的网页做任何操作，那么有什么办法可以解决呢？</p></blockquote><h1 id="User-Agent-Cookie（拉跨）"><a href="#User-Agent-Cookie（拉跨）" class="headerlink" title="User-Agent + Cookie（拉跨）"></a>User-Agent + Cookie（拉跨）</h1><h2 id="微信的User-Agent检查"><a href="#微信的User-Agent检查" class="headerlink" title="微信的User-Agent检查"></a>微信的User-Agent检查</h2><p>当你尝试用浏览器打开一部分微信内网页时，微信就会善良地提醒你<br><img src="https://picbed.godke.blog/img/Pasted%20image%2020240309134251.png" alt="Pasted image 20240309134251.png"></p><p>这时我们查看网页源代码，就会发现这样一段检查</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1, user-scalable=0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-handlebars"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars">            var ua = navigator.userAgent.toLowerCase();</span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars">            var isWeixin = ua.indexOf(&#x27;micromessenger&#x27;) != -1; //isWeixin</span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars">            var isAndroid = ua.indexOf(&#x27;android&#x27;) != -1;</span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars">            var isIos = (ua.indexOf(&#x27;iphone&#x27;) != -1) || (ua.indexOf(&#x27;ipad&#x27;) != -1);</span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars">            if (!isWeixin) &#123;</span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars">                document.head.innerHTML = &#x27;<span class="tag">&lt;<span class="name">title</span>&gt;</span>抱歉，出错了<span class="tag">&lt;/<span class="name">title</span>&gt;</span><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1, user-scalable=0&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://res.wx.qq.com/open/libs/weui/0.4.1/weui.css&quot;</span>&gt;</span>&#x27;;</span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars">                document.body.innerHTML = &#x27;<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;weui_msg&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;weui_icon_area&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;weui_icon_info weui_icon_msg&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;weui_text_area&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">h4</span> <span class="attr">class</span>=<span class="string">&quot;weui_msg_title&quot;</span>&gt;</span>请在微信客户端打开链接<span class="tag">&lt;/<span class="name">h4</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>&#x27;;</span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars">            &#125;</span></span></span><br><span class="line"><span class="language-xml"><span class="language-handlebars">        </span></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure><p>不难发现isWeixin的检查是看UA里有没有micromessenger，它还善良地开了大小写兼容，我哭死</p><p>于是我在UA里写上MicroMessenger，再刷新<br><img src="https://picbed.godke.blog/img/Pasted%20image%2020240309134633.png" alt="Pasted image 20240309134633.png"></p><p>于是便发现我们确实可以进入网页了，但是为什么一片雪白？<br><img src="https://picbed.godke.blog/img/Pasted%20image%2020240309134741.png" alt="Pasted image 20240309134741.png"></p><h3 id="Cookie需求"><a href="#Cookie需求" class="headerlink" title="Cookie需求"></a>Cookie需求</h3><p>很显然我们没有Cookie来表明自己的身份，人家服务器都不知道我们是谁，怎么给我们推送数据<br>（当然一些公共网页不需要身份，是可以自己打开的（也许），但大部分都要Cookie）<br>而WeiXin的Cookie有点难获取，需要用fiddle抓包，还不好找，所以<strong>不建议这么玩</strong></p><h1 id="直接打入敌人内部（万能）"><a href="#直接打入敌人内部（万能）" class="headerlink" title="直接打入敌人内部（万能）"></a>直接打入敌人内部（万能）</h1><p>很显然微信的开发者肯定需要一个调试的路径，所以我们只要伪装成开发者去调试就行<br><strong>直接上过程</strong></p><h2 id="打开手机的USB调试"><a href="#打开手机的USB调试" class="headerlink" title="打开手机的USB调试"></a>打开手机的USB调试</h2><p>在开发人员选项里有USB调试的相关选项，打开即可，当然要先开启开发人员模式<br><img src="https://picbed.godke.blog/img/429a50f9f5709eeadbbcc8b92a9b7ab.jpg" alt="429a50f9f5709eeadbbcc8b92a9b7ab.jpg|350"></p><h2 id="连接手机和电脑"><a href="#连接手机和电脑" class="headerlink" title="连接手机和电脑"></a>连接手机和电脑</h2><p>直接用数据线连起来就行，开启传输文件最佳<br>似乎打开了“仅充电”模式下允许ADB调试的话就可以开仅充电</p><h2 id="开启微信的调试模式"><a href="#开启微信的调试模式" class="headerlink" title="开启微信的调试模式"></a>开启微信的调试模式</h2><p>在手机微信内点击链接</p><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://debugxweb.qq.com/?inspector=true</span><br></pre></td></tr></table></figure><p>如果正常的话就可以看到执行成功的提示<br><img src="https://picbed.godke.blog/img/0e8adf28492175cdccec7150dd7f86a.jpg" alt="0e8adf28492175cdccec7150dd7f86a.jpg|350"></p><h2 id="浏览器启动调试"><a href="#浏览器启动调试" class="headerlink" title="浏览器启动调试"></a>浏览器启动调试</h2><p>在浏览器内输入相应地址<br>Chrome输入 <a href="chrome://inspect/#devices">chrome:&#x2F;&#x2F;inspect&#x2F;#devices</a><br>Edge输入 <a href="edge://inspect/#devices">edge:&#x2F;&#x2F;inspect&#x2F;#decives</a></p><p>浏览器端就可以看到页面<br><img src="https://picbed.godke.blog/img/Pasted%20image%2020240309140435.png" alt="Pasted image 20240309140435.png"></p><p>手机端则会接到通知，点击确定即可<br><img src="https://picbed.godke.blog/img/957b92b0dbc978aa7fda20bc34f4503.jpg" alt="957b92b0dbc978aa7fda20bc34f4503.jpg|350"></p><h2 id="开始调试"><a href="#开始调试" class="headerlink" title="开始调试"></a>开始调试</h2><p>这时在手机端打开一个只能在微信打开的网页，比如一些公众号的功能网页（以青年大学习为例） </p><p>如果理想的话网页端就可以检测到WebView<br><img src="https://picbed.godke.blog/img/Pasted%20image%2020240309140920.png" alt="Pasted image 20240309140920.png"></p><p>点击inspect就可以进入调试页面，本质上调用了edge的调试工具<br><img src="https://picbed.godke.blog/img/Pasted%20image%2020240309141027.png" alt="Pasted image 20240309141027.png"></p><p>这个页面就和直接打开网页没有区别，可以直接在网页上浏览（手机上也会同步浏览）<br>也可以直接通过检查和修改元素改变手机上显示的元素</p><h1 id="一些问题情况的解决"><a href="#一些问题情况的解决" class="headerlink" title="一些问题情况的解决"></a>一些问题情况的解决</h1><p>一般来说只要重复两个动作就能解决大部分问题<br>一是[[99others&#x2F;微信内部网页调试&#x2F;如何调试微信中的网页#开启微信的调试模式|开启微信的调试模式]]<br>二是[[99others&#x2F;微信内部网页调试&#x2F;如何调试微信中的网页#打开手机的USB调试|打开手机的USB调试]]</p><h2 id="找不到设备？"><a href="#找不到设备？" class="headerlink" title="找不到设备？"></a>找不到设备？</h2><p>如果发现浏览器一直检查不到设备，可以选择下载<br><a href="https://deanfun.lanzoub.com/iP3hO17liu0d">minimal_adb_fastboot_1.4.3_portable.zip - 蓝奏云 (lanzoub.com)</a><br>下载到的内容是<br><img src="https://picbed.godke.blog/img/Pasted%20image%2020240309141628.png" alt="Pasted image 20240309141628.png"></p><p>你可以选择把它放到已经在系统PATH的文件夹里，这样就可以直接调用adb，也可以选择直接指定adb.exe来调用命令 <strong>adb devices</strong><br>正常的话就会看到该命令开启了一个adb通道<br><img src="https://picbed.godke.blog/img/Pasted%20image%2020240309141814.png" alt="Pasted image 20240309141814.png"></p><p>这时候一般就能在浏览器看到设备了</p><h1 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h1><p><img src="https://picbed.godke.blog/img/Pasted%20image%2020240309142052.png" alt="Pasted image 20240309142052.png"></p><p>通过选中元素进行调试的方法就能很方便地修改所有元素，比如这里修改了积分</p><p>手机端此时也会同步显示，且由于本质上资源已经被修改了，即使你关掉调试和连接，只要这个页面没有重载，就不会被改回去</p><p><img src="https://picbed.godke.blog/img/824030c06980f2a1e3160587159bd09.jpg" alt="824030c06980f2a1e3160587159bd09.jpg|400"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术杂谈 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> WeChat </tag>
+            
+            <tag> debug </tag>
             
         </tags>
       
