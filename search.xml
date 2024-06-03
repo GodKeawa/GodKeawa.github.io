@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>破解游戏文件加密</title>
+      <link href="/2024/06/03/sffcrack/"/>
+      <url>/2024/06/03/sffcrack/</url>
+      
+        <content type="html"><![CDATA[<p>俗话说，色色是宅男的第一生产力，当你看到游戏里有好看的色图时，第一反应肯定是想把它保存下来，以备后续“细细品鉴”，但是很多游戏就是喜欢搞点东西不让你保存，就算是用万能的截图大法也要给你放点游戏UI挡视野，这时候就只能解包了<br>过去游戏解包非常的公式化，只要搞清楚了打包的加密方式就行，但是这次的吊人属实狠，直接把原图都给加密了，虽然把包给解了，但是包里面还有一层加密，属实是恶心至极<br>必须干他一炮</p><p>解开包以后发现img文件夹里全是sff文件，这文件搜了一下，也就mugen相关的能和图搭上关系，其他的简直八竿子打不着，先试着改改后缀名碰碰运气，只可惜运气不好</p><p>这下必须上狠招了，直接看文件的magic number<br><img src="https://picbed.godke.blog/img/20240603155843.png" alt="image.png"></p><p>魔数居然是TJC，这完全不是正常文件的魔数，到魔数表里一查，根本没这个东西<br><a href="https://www.garykessler.net/library/file_sigs.html">File Signatures (garykessler.net)</a></p><p>这就有点头痛了，毕竟完全不知道是怎么加密来的，不过大概率不会是很恶心的加密，因为游戏使用这个数据的时候还要自己解码一遍，估计就是个很简单的加密</p><p>先把前面的二进制直接放进搜索引擎试试<br>居然发现了一个有趣的东西<br><a href="https://bbs.kanxue.com/thread-199634.htm">打脸：看我如何用3天时间黑掉“网秦私密空间（NQ Vault）”-茶余饭后-看雪-安全社区|安全招聘|kanxue.com</a></p><p>可以看到PNG文件的魔数加密后恰好就是这个魔数，简直一模一样，于是我们可以确定这就是从PNG文件加密来的文件，还恶意改了个后缀名防破解</p><p>这下故事就简单了，知道了加密数据和原数据，得到加密方式简直无比简单，逆向就更简单了<br>而且这个文件后续的一堆数据都是0x04，众所周知，图片文件中无色一般都是用0x00表示的，所以掩码就是0x04</p><p>直接二进制破解，使用C加速，毕竟是逐字节运算</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//cracker</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    FILE *source, *cracked;</span><br><span class="line">    <span class="type">int</span> chara;</span><br><span class="line"></span><br><span class="line">    source = fopen(<span class="string">&quot;0.sff&quot;</span>, <span class="string">&quot;rb&quot;</span>);</span><br><span class="line">    cracked = fopen(<span class="string">&quot;0.png&quot;</span>, <span class="string">&quot;wb&quot;</span>);</span><br><span class="line">    <span class="keyword">while</span> ((chara = fgetc(source)) != EOF) </span><br><span class="line">        fputc(chara ^ <span class="number">0x4</span>, cracked);</span><br><span class="line"></span><br><span class="line">    fclose(source);</span><br><span class="line">    fclose(cracked);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>解码后打开，图片正常显示，成功解决</p><p>原本写个脚本提取所有sff文件批处理即可，但是最近发现powertoys里有一个很方便的可以展开全部文件夹的功能，我们直接把解包后的所有数据展开到一个文件夹里，然后按后缀名排序就能找到全部图片资源</p><p>提取所有文件后，再把想要的用power rename全部改成简单的数列名称，简单使用c代码处理就好<br>PS：解散后一共3900个文件，这代码构造属实离谱，估计是直接生成的</p><p>总的来说真正的难度还是在于解包，毕竟游戏运行时加密文件是要解密使用的，必然不会用很恶心的加密方式<br>也就挡挡普通人了</p><p>色图太色，放出来有伤风化</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术杂谈 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> crack </tag>
+            
+            <tag> magic_number </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>树莓派小车闹麻了</title>
       <link href="/2024/05/27/PiCar/"/>
       <url>/2024/05/27/PiCar/</url>
@@ -370,9 +397,9 @@
       
         <tags>
             
-            <tag> github </tag>
-            
             <tag> vscode </tag>
+            
+            <tag> github </tag>
             
             <tag> copilot </tag>
             
