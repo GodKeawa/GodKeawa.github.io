@@ -46,7 +46,36 @@ jobs:
           app_build_command: "hugo --minify"
           github_id_token: ${{ steps.idtoken.outputs.result }}
           ###### End of Repository/Build Configurations ######
+  deploy_github_pages: # 新增一个 job 用于 GitHub Pages 部署
+    # 仅在 main 分支 push 时触发，并且确保上一个构建 job 成功
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: build_and_deploy_job # 确保 Azure SWA 部署成功后才运行此 job
+    name: Deploy to GitHub Pages
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+          lfs: false
 
+      # 1. 确保构建 Hugo 网站
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Build Hugo Site
+        run: hugo --minify
+
+      # 2. 部署到 gh-pages 分支
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub 提供的内置 token
+          publish_dir: ./public # 指定要部署的文件夹，即 Hugo 的输出目录
+          # publish_branch: gh-pages # 默认就是 gh-pages，可以省略
+          
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
