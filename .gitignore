@@ -10,8 +10,7 @@ node_modules
 .Trashes
 
 # Hugo
-# public 
-# for github pages
+public 
 
 # obsidian
 .obsidian
