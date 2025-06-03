@@ -26,4 +26,4 @@ int main() {
 }
 ```
 
-<img src="/imgs/image_2025_6_3_15_1_6.jpg" width="auto">
+![](/imgs/HEAD.jpg)
