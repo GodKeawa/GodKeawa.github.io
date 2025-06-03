@@ -12,9 +12,5 @@ node_modules
 # Hugo
 public
 
-# theme
-themes/blowfish/package.json
-themes/blowfish/package-lock.json
-
 # obsidian
 .obsidian
