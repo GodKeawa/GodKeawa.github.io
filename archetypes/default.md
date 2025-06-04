@@ -1,6 +1,6 @@
 ---
 title: 
 date: 
-draft: 
+draft: false
 ---
 

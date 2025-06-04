@@ -19,7 +19,7 @@ mainSections = ["posts"]
 
 disableImageOptimization   = false
 disableImageOptimizationMD = false
-disableTextInHeader        = true
+disableTextInHeader        = false
 # backgroundImageWidth = 1200
 
 defaultBackgroundImage = "/img/background.svg"
@@ -28,7 +28,7 @@ defaultBackgroundImage = "/img/background.svg"
 
 highlightCurrentMenuArea      = true
 smartTOC                      = true
-smartTOCHideUnfocusedChildren = false
+smartTOCHideUnfocusedChildren = true
 
 [header]
     layout = "fixed" # valid options: basic, fixed, fixed-fill, fixed-gradient, fixed-fill-blur
@@ -54,8 +54,8 @@ smartTOCHideUnfocusedChildren = false
 
 [article]
     showDate              = true
-    showViews             = false
-    showLikes             = false
+    showViews             = true
+    showLikes             = true
     showDateOnlyInArticle = false
     showDateUpdated       = true
     showAuthor            = false
@@ -72,13 +72,13 @@ smartTOCHideUnfocusedChildren = false
     showHeadingAnchors  = true
     showPagination      = true
     invertPagination    = false
-    showReadingTime     = true
+    showReadingTime     = false
     showTableOfContents = true
     showRelatedContent  = true
     relatedContentLimit = 6
     showTaxonomies      = true
     showAuthorsBadges   = true
-    showWordCount       = false
+    showWordCount       = true
     # sharingLinks = [
     #     "linkedin",
     #     "twitter",
@@ -134,13 +134,13 @@ smartTOCHideUnfocusedChildren = false
     cardViewScreenWidth = false
 
 [firebase]
-    #apiKey = "AIzaSyB5tqlqDky77Vb4Tc4apiHV4hRZI18KGiY"
-    #authDomain = "blowfish-21fff.firebaseapp.com"
-    #projectId = "blowfish-21fff"
-    #storageBucket = "blowfish-21fff.appspot.com"
-    #messagingSenderId = "60108104191"
-    #appId = "1:60108104191:web:039842ebe1370698b487ca"
-    #measurementId = "G-PEDMYR1V0K"
+    apiKey            = "AIzaSyBz9szC6mRkMf49AuVrv9pAV4WmG5sTRD8"
+    authDomain        = "blog-f6baa.firebaseapp.com"
+    projectId         = "blog-f6baa"
+    storageBucket     = "blog-f6baa.firebasestorage.app"
+    messagingSenderId = "58432105324"
+    appId             = "1:58432105324:web:d2389b3eaf5277868c6149"
+    measurementId     = "G-B30S8854WN"
 
 [fathomAnalytics]
     # site = "ABC12345"

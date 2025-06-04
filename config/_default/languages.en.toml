@@ -1,13 +1,12 @@
 languageCode = "en"
 languageName = "English"
 weight       = 1
-# title        = "GodKe's Blog"
+title        = "GodKe.BLOG"
 
 [params]
     displayName = "English"
     isoCode     = "en"
     rtl         = false
-    logo        = "img/title.png"
     dateFormat  = "2 January 2006"
     description = "GodKe's Blog is a personal blog that shares knowledge and experiences in programming, technology, and life."
     copyright   = "Copyright © 2023 GodKeawa. All Rights Reserved."
