@@ -1,0 +1,22 @@
+.max-w-7xl {
+  max-width: 100rem !important;
+  /* 默认是80rem，增加到100rem */
+}
+
+.max-w-4xl {
+  max-width: 65rem !important;
+  /* 默认是56rem，增加到65rem */
+}
+
+.max-w-3xl {
+  max-width: 55rem !important;
+  /* 默认是48rem，增加到55rem */
+}
+
+.max-w-prose {
+  max-width: 100ch !important;
+}
+
+.font-medium {
+  font-size: 1.2rem !important;
+}

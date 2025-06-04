@@ -9,7 +9,7 @@ title        = "GodKe.BLOG"
     rtl         = false
     dateFormat  = "2 January 2006"
     description = "GodKe's Blog is a personal blog that shares knowledge and experiences in programming, technology, and life."
-    copyright   = "Copyright © 2023 GodKeawa. All Rights Reserved."
+    copyright   = "Copyright © 2023 GodKe. All Rights Reserved."
 
     [params.author]
         name         = "GodKe"

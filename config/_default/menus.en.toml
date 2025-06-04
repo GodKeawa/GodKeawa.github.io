@@ -48,7 +48,7 @@
     weight = 70
 
 [[main]]
-    name   = "Cloudflare"
+    name   = "Cloudflare Pages"
     parent = "MirrorSite"
     url    = "https://cf.godke.blog/"
     weight = 80
