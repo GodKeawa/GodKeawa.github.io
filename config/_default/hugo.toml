@@ -49,7 +49,7 @@ enableEmoji = true
 
     [[related.indices]]
         name   = "categories"
-        weight = 100
+        weight = 80
 
     [[related.indices]]
         name   = "series"
@@ -60,11 +60,6 @@ enableEmoji = true
         name   = "date"
         weight = 10
 
-    [[related.indices]]
-        applyFilter = false
-        name        = 'fragmentrefs'
-        type        = 'fragments'
-        weight      = 10
 
 # Render only specific parts of the site for faster development. Use: hugo --renderSegments site_core
 [segments]

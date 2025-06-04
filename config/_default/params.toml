@@ -19,12 +19,12 @@ mainSections = ["posts"]
 
 disableImageOptimization   = false
 disableImageOptimizationMD = false
-disableTextInHeader        = false
+disableTextInHeader        = true
 # backgroundImageWidth = 1200
 
 defaultBackgroundImage = "/img/background.svg"
-defaultFeaturedImage   = "/img/featured.svg"
-defaultSocialImage     = "/img/blowfish.jpg"
+# defaultFeaturedImage   = "/img/featured.svg"
+# defaultSocialImage     = "/img/blowfish.jpg"
 
 highlightCurrentMenuArea      = true
 smartTOC                      = true
@@ -41,9 +41,9 @@ smartTOCHideUnfocusedChildren = false
     showScrollToTop        = true
 
 [homepage]
-    layout = "custom" # valid options: page, profile, hero, card, background, custom
+    layout = "background" # valid options: page, profile, hero, card, background, custom
     # homepageImage = "/img/iceland.jpg" # used in: hero, and card
-    showRecent             = false
+    showRecent             = true
     showRecentItems        = 6
     showMoreLink           = true
     showMoreLinkDest       = "posts"
@@ -53,18 +53,18 @@ smartTOCHideUnfocusedChildren = false
     disableHeroImageFilter = false   # only used when layout equals hero
 
 [article]
-    showDate              = false
+    showDate              = true
     showViews             = false
     showLikes             = false
     showDateOnlyInArticle = false
-    showDateUpdated       = false
-    showAuthor            = true
-    # showAuthorBottom = false
-    showHero             = true
-    heroStyle            = "background" # valid options: basic, big, background, thumbAndBackground
-    layoutBackgroundBlur = true         # only used when heroStyle equals background
-    showBreadcrumbs      = true
-    showDraftLabel       = true
+    showDateUpdated       = true
+    showAuthor            = false
+    showAuthorBottom      = true
+    showHero              = true
+    heroStyle             = "background" # valid options: basic, big, background, thumbAndBackground
+    layoutBackgroundBlur  = true         # only used when heroStyle equals background
+    showBreadcrumbs       = true
+    showDraftLabel        = true
     # showEdit = true
     # editURL = "https://github.com/"
     # editAppendPath = true

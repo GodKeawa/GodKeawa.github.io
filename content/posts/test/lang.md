@@ -1,8 +1,10 @@
-+++
-date = '2025-06-03T14:57:00+08:00'
-draft = false
-title = 'Move_to_hugo'
-+++
+---
+date: '2025-06-03T14:57:00+08:00'
+draft: false
+title: 'Move_to_hugo'
+categories: ['test']
+tags: ['test', 'image']
+---
 
 move all files to hugo and Azure
 # title 1

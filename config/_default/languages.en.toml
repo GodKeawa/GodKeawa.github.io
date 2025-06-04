@@ -1,19 +1,22 @@
 languageCode = "en"
 languageName = "English"
 weight       = 1
-title        = "GodKe's Blog"
+# title        = "GodKe's Blog"
 
 [params]
     displayName = "English"
     isoCode     = "en"
     rtl         = false
+    logo        = "img/title.png"
     dateFormat  = "2 January 2006"
     description = "GodKe's Blog is a personal blog that shares knowledge and experiences in programming, technology, and life."
+    copyright   = "Copyright © 2023 GodKeawa. All Rights Reserved."
 
     [params.author]
-        name     = "GodKe"
-        email    = "3601262198@qq.com"
-        image    = "img/logo.png"
-        headline = "NOOB in FDU"
-        bio      = "Just for Fun"
-        links    = [{ github = "https://github.com/GodKeawa" }]
+        name         = "GodKe"
+        email        = "3601262198@qq.com"
+        image        = "img/logo.png"
+        imageQuality = 100
+        headline     = "NOOB in FDU"
+        bio          = "Just for Fun"
+        links        = [{ github = "https://github.com/GodKeawa" }]
