@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Image on</title><link>https://godke.blog/tags/image/</link><description>Recent content in Image on</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>3601262198@qq.com (GodKe)</managingEditor><webMaster>3601262198@qq.com (GodKe)</webMaster><copyright>Copyright © 2023 GodKeawa. All Rights Reserved.</copyright><lastBuildDate>Tue, 03 Jun 2025 14:57:00 +0800</lastBuildDate><atom:link href="https://godke.blog/tags/image/index.xml" rel="self" type="application/rss+xml"/><item><title>Move_to_hugo</title><link>https://godke.blog/posts/test/lang/</link><pubDate>Tue, 03 Jun 2025 14:57:00 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/test/lang/</guid><description>&lt;p>move all files to hugo and Azure&lt;/p>
+&lt;h1 class="relative group">title 1
+&lt;div id="title-1" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#title-1" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h1>
+&lt;h2 class="relative group">title 2
+&lt;div id="title-2" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#title-2" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h2>
+&lt;h3 class="relative group">title 3
+&lt;div id="title-3" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#title-3" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h3>
+&lt;ul>
+&lt;li>1&lt;/li>
+&lt;li>2&lt;/li>
+&lt;li>3&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>1&lt;/li>
+&lt;li>2&lt;/li>
+&lt;li>3&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>refs&lt;/p></description></item></channel></rss>
