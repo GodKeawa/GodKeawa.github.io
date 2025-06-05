@@ -48,7 +48,7 @@ jobs:
           github_id_token: ${{ steps.idtoken.outputs.result }}
           ###### End of Repository/Build Configurations ######
         env:
-          HUGO_VERSION: 'latest'
+          HUGO_VERSION: '0.147.7'
           HUGO_EXTENDED: 'true'
           
   deploy_github_pages: # 新增一个 job 用于 GitHub Pages 部署
