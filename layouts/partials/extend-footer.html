@@ -1,0 +1,10 @@
+<script type="module">
+    import { pageviewCount } from 'https://unpkg.com/@waline/client@v3/dist/pageview.js';
+
+    pageviewCount({
+        serverURL: 'https://admin.godke.blog',
+        path: window.location.pathname,
+
+        update: false,
+    });
+</script>

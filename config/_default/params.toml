@@ -55,7 +55,7 @@ smartTOCHideUnfocusedChildren = true
 [article]
     showDate              = true
     showViews             = true
-    showLikes             = true
+    showLikes             = false
     showDateOnlyInArticle = false
     showDateUpdated       = true
     showAuthor            = false
@@ -68,7 +68,7 @@ smartTOCHideUnfocusedChildren = true
     # showEdit = true
     # editURL = "https://github.com/"
     # editAppendPath = true
-    seriesOpened        = false
+    seriesOpened        = true
     showHeadingAnchors  = true
     showPagination      = true
     invertPagination    = false
@@ -90,7 +90,8 @@ smartTOCHideUnfocusedChildren = true
     #     "facebook",
     #     "email",
     # ]
-    showZenMode = true
+    showComments = true
+    showZenMode  = true
 
 [list]
     showHero                    = true
@@ -134,13 +135,13 @@ smartTOCHideUnfocusedChildren = true
     cardViewScreenWidth = false
 
 [firebase]
-    apiKey            = "AIzaSyBz9szC6mRkMf49AuVrv9pAV4WmG5sTRD8"
-    authDomain        = "blog-f6baa.firebaseapp.com"
-    projectId         = "blog-f6baa"
-    storageBucket     = "blog-f6baa.firebasestorage.app"
-    messagingSenderId = "58432105324"
-    appId             = "1:58432105324:web:d2389b3eaf5277868c6149"
-    measurementId     = "G-B30S8854WN"
+    # apiKey            = ""
+    # authDomain        = ""
+    # projectId         = ""
+    # storageBucket     = ""
+    # messagingSenderId = ""
+    # appId             = ""
+    # measurementId     = ""
 
 [fathomAnalytics]
     # site = "ABC12345"
