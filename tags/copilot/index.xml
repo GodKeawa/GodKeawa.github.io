@@ -6,4 +6,78 @@
 &lt;figure>
 &lt;img class="my-0 rounded-md" loading="lazy" alt="" src="https://godke.blog/imgs/20240404221302.jpg" />
 &lt;/figure>
-&lt;/p></description></item></channel></rss>
+&lt;/p>
+&lt;p>目前来说网上还是有挺多申请教程的，但是似乎都有些outdated，尤其是很多申请居然还需要填写各种东西&lt;/p>
+&lt;h1 class="relative group">使用教育邮箱
+&lt;div id="使用教育邮箱" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e4%bd%bf%e7%94%a8%e6%95%99%e8%82%b2%e9%82%ae%e7%ae%b1" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h1>
+&lt;p>目前的经验是，最好有一个教育邮箱绑定到自己的GitHub账号上，这样申请时选择教育邮箱再接个验证码认证一下，就可以直接进入提交材料的环节了&lt;/p>
+&lt;h1 class="relative group">使用dns加速
+&lt;div id="使用dns加速" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e4%bd%bf%e7%94%a8dns%e5%8a%a0%e9%80%9f" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h1>
+&lt;p>有很多教程都说不能开加速器，因为会要求共享地理位置，但实际上加速也有很多类型
+这里推荐watt toolkit（原steam++）的host模式加速
+原理就是中国的墙实际上是对steam进行dns污染，如果你使用中国的dns服务，那多半会被拒绝访问
+但是也有很多dns服务是不墙steam的，比如cloudflare的，watt toolkit就支持让你直接使用指定的dns
+这样你的ip地址和其他信息并没有变，只是为你提供域名解析服务的服务商变了，是可以通过地理认证的&lt;/p>
+&lt;p>不过我直接用校园网访问，似乎没有问题&lt;/p>
+&lt;h1 class="relative group">提交材料
+&lt;div id="提交材料" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e6%8f%90%e4%ba%a4%e6%9d%90%e6%96%99" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h1>
+&lt;p>提交材料的初审是AI进行了，似乎只是检测一下有没有关键信息和材料的形式&lt;/p>
+&lt;p>目前的建议是&lt;/p>
+&lt;ul>
+&lt;li>填写好GitHub账号的各种信息，最好和你准备提交的材料强相关&lt;/li>
+&lt;li>填写好付款信息
+&lt;ul>
+&lt;li>这里注意一下最好不要填中国的地址，因为中国地址会禁止付款（中国政府规定的）&lt;/li>
+&lt;li>反正我的已经禁止付款了，而且修改不了，如果是外国地址后续还可以修改&lt;/li>
+&lt;li>不过不影响申请，还是能白嫖&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>设置好2FA，现在已经是强制要求了，可以用edge的插件，个人建议还是伪装成美国人，如果用edge插件一定要到插件设置页面做一个备份，2FA的恢复码也保存一下，不然你就会体验手机丢了要登录电脑微信的感觉
+&lt;ul>
+&lt;li>给你的某个设备（不能是华为）刷一个国际版安卓&lt;/li>
+&lt;li>安装代理和GMS&lt;/li>
+&lt;li>创建一个gmail&lt;/li>
+&lt;li>愉快地使用Google play&lt;/li>
+&lt;li>使用任意2FA软件，同步到云&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>材料使用翻译过的学信网认证材料
+&lt;ul>
+&lt;li>学信网下载学籍验证报告
+&lt;ul>
+&lt;li>&lt;a href="https://my.chsi.com.cn/archive/bab/index.action" target="_blank">学信档案 (chsi.com.cn)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>使用GitHub开源项目翻译报告
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/Nagi-ovo/CHSI-Converter" target="_blank">Nagi-ovo/CHSI-Converter: 在线一键转化英文版学信档案 (github.com)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>自己用word稍微调整一下格式然后做成pdf&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>一定要直接用手机拍，如果有条件可以把学生证和一卡通也拍进去，反正AI会检测各种信息
+&lt;ul>
+&lt;li>反正我是直接拍了报告就通过了&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>通过以后就是漫长的等待，似乎也不用自己主动领取，到账了直接上GitHub就能看到自己已经是GitHub Pro了&lt;/p></description></item></channel></rss>
