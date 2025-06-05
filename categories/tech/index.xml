@@ -1,124 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tech on GodKe.BLOG</title><link>https://godke.blog/categories/tech/</link><description>Recent content in Tech on GodKe.BLOG</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>3601262198@qq.com (GodKe)</managingEditor><webMaster>3601262198@qq.com (GodKe)</webMaster><copyright>Copyright © 2023 GodKe. All Rights Reserved.</copyright><lastBuildDate>Mon, 03 Jun 2024 15:51:38 +0800</lastBuildDate><atom:link href="https://godke.blog/categories/tech/index.xml" rel="self" type="application/rss+xml"/><item><title>破解游戏文件加密</title><link>https://godke.blog/posts/tech/%E7%A0%B4%E8%A7%A3%E6%B8%B8%E6%88%8F%E6%96%87%E4%BB%B6%E5%8A%A0%E5%AF%86/</link><pubDate>Mon, 03 Jun 2024 15:51:38 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/%E7%A0%B4%E8%A7%A3%E6%B8%B8%E6%88%8F%E6%96%87%E4%BB%B6%E5%8A%A0%E5%AF%86/</guid><description>&lt;p>俗话说，色色是宅男的第一生产力，当你看到游戏里有好看的色图时，第一反应肯定是想把它保存下来，以备后续“细细品鉴”，但是很多游戏就是喜欢搞点东西不让你保存，就算是用万能的截图大法也要给你放点游戏UI挡视野，这时候就只能解包了
-过去游戏解包非常的公式化，只要搞清楚了打包的加密方式就行，但是这次的吊人属实狠，直接把原图都给加密了，虽然把包给解了，但是包里面还有一层加密，属实是恶心至极
-必须干他一炮&lt;/p>
-&lt;p>解开包以后发现img文件夹里全是sff文件，这文件搜了一下，也就mugen相关的能和图搭上关系，其他的简直八竿子打不着，先试着改改后缀名碰碰运气，只可惜运气不好&lt;/p>
-&lt;p>这下必须上狠招了，直接看文件的magic number
-&lt;figure>
-&lt;img class="my-0 rounded-md" loading="lazy" alt="image.png" src="https://godke.blog/imgs/20240603155843.jpg" />
-&lt;/figure>
-&lt;/p>
-&lt;p>魔数居然是TJC，这完全不是正常文件的魔数，到魔数表里一查，根本没这个东西
-&lt;a href="https://www.garykessler.net/library/file_sigs.html" target="_blank">File Signatures (garykessler.net)&lt;/a>&lt;/p>
-&lt;p>这就有点头痛了，毕竟完全不知道是怎么加密来的，不过大概率不会是很恶心的加密，因为游戏使用这个数据的时候还要自己解码一遍，估计就是个很简单的加密&lt;/p>
-&lt;p>先把前面的二进制直接放进搜索引擎试试
-居然发现了一个有趣的东西
-&lt;a href="https://bbs.kanxue.com/thread-199634.htm" target="_blank">打脸：看我如何用3天时间黑掉“网秦私密空间（NQ Vault）”-茶余饭后-看雪-安全社区|安全招聘|kanxue.com&lt;/a>&lt;/p>
-&lt;p>可以看到PNG文件的魔数加密后恰好就是这个魔数，简直一模一样，于是我们可以确定这就是从PNG文件加密来的文件，还恶意改了个后缀名防破解&lt;/p>
-&lt;p>这下故事就简单了，知道了加密数据和原数据，得到加密方式简直无比简单，逆向就更简单了
-而且这个文件后续的一堆数据都是0x04，众所周知，图片文件中无色一般都是用0x00表示的，所以掩码就是0x04&lt;/p>
-&lt;p>直接二进制破解，使用C加速，毕竟是逐字节运算&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//cracker
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;stdio.h&amp;gt;&lt;/span>&lt;span class="cp">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;stdlib.h&amp;gt;&lt;/span>&lt;span class="cp">
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">FILE&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">source&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">cracked&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">chara&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">source&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">fopen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;0.sff&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;rb&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cracked&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">fopen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;0.png&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;wb&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span> &lt;span class="p">((&lt;/span>&lt;span class="n">chara&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">fgetc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">source&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">EOF&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">fputc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">chara&lt;/span> &lt;span class="o">^&lt;/span> &lt;span class="mh">0x4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cracked&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">fclose&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">source&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">fclose&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cracked&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">EXIT_SUCCESS&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>解码后打开，图片正常显示，成功解决&lt;/p>
-&lt;p>原本写个脚本提取所有sff文件批处理即可，但是最近发现powertoys里有一个很方便的可以展开全部文件夹的功能，我们直接把解包后的所有数据展开到一个文件夹里，然后按后缀名排序就能找到全部图片资源&lt;/p>
-&lt;p>提取所有文件后，再把想要的用power rename全部改成简单的数列名称，简单使用c代码处理就好
-PS：解散后一共3900个文件，这代码构造属实离谱，估计是直接生成的&lt;/p>
-&lt;p>总的来说真正的难度还是在于解包，毕竟游戏运行时加密文件是要解密使用的，必然不会用很恶心的加密方式
-也就挡挡普通人了&lt;/p>
-&lt;p>色图太色，放出来有伤风化&lt;/p></description></item><item><title>ajax网站资源爬取</title><link>https://godke.blog/posts/tech/ajax%E7%BD%91%E7%AB%99%E8%B5%84%E6%BA%90%E7%88%AC%E5%8F%96/</link><pubDate>Wed, 24 Apr 2024 19:11:53 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/ajax%E7%BD%91%E7%AB%99%E8%B5%84%E6%BA%90%E7%88%AC%E5%8F%96/</guid><description>&lt;p>最近想看周次，然后发现这小说现在似乎比较新，文库版还在出，找了半天勉强找到一二卷的台版，后面都没出版，肯定是没希望了，只好跑去猪先生给的百合会帖子下看&lt;/p>
-&lt;p>这帖子说好也好，说不好真是问题一堆
-首先就是我的手机端上似乎不显示目录，只能看评论区一个一个来，调成PC模式又唐得一批，字还小，只好到电脑上看，结果发现电脑上一样唐&lt;/p>
-&lt;p>虽然它善良地把所有内容做到了一个网页上，还给了个目录，但是这个目录实在是太长了，每次想要跳到下一个episode都要划半天屏幕或者鼠标滚轮，麻烦得一批，所以最后还是考虑直接爬下来算了，反正自己最近也在玩爬虫，顺便搞搞复杂一点的&lt;/p>
-&lt;p>首先这个网页的特性非常奇怪，众所周知的是网页一般点击一个按钮就会跳转到某个新的网页，或者以某种方式刷新一次，传给你一个新的网页，但是如果你点击这个网页的按钮来切换章节，就会发现这个网页的本体完全没有更新，只是部分元素更新了&lt;/p>
-&lt;p>这一点有点熟悉，之前捣鼓自己网站的时候就有尝试一个技术栈，就是让网站到处跳转的时候只更新必要更新的内容，而现成的架构就是ajax，可以通过编写专门的方案控制网站元素更新&lt;/p>
-&lt;p>当时我的想法就是文章间跳转只更新文章的内容和标题，以及刷新评论区，只可惜这个吊东西bug太多，写多了容易导致css不工作，整个网页的动画就会卡bug，没想到我想做的东西在这个网站复现了&lt;/p>
-&lt;p>传统网页好爬是因为只要相应的修改域名，就可以直接get，但是这个网站如果用域名爬，永远都只能爬到第一个episode，而且你使用按钮切换章节后，域名是不变的，只是展示给你的东西变了&lt;/p>
-&lt;p>打开网页进行调试，不出所料地看到了ajax的get申请
-&lt;figure>
-&lt;img class="my-0 rounded-md" loading="lazy" alt="image.png" src="https://godke.blog/imgs/20240424194910.png" />
-&lt;/figure>
-&lt;/p>
-&lt;p>因为ajax申请返回的东西就是网页变化的东西，也就是我们需要的小说的正文，所以其实不用每次都调取ajax-get后再爬取网页，直接把ajax返回的东西爬下来反而更方便&lt;/p>
-&lt;p>根据约定，ajax-get是xhr请求，直接去网络调试把请求抓下来就行
-&lt;figure>
-&lt;img class="my-0 rounded-md" loading="lazy" alt="image.png" src="https://godke.blog/imgs/20240424195320.png" />
-&lt;/figure>
-可以看到请求url里有post的id，也就是这个帖子的id，还有一个viewpid，这个就是当前展示页面的id
-多尝试几次就会发现viewpid是唯一变化的东西，而且这个viewpid是根据更新时间来编号的
-前两个episode的viewpid一个等于post的id，一个等于post的id加1，后面的加的更多，因为更新后viewpid会改变&lt;/p>
-&lt;p>虽然我们无法直接依次轮询viewpid来爬取，但是这个viewpid很好找
-因为就一般逻辑而言，viewpid肯定在按钮上保存了一份，不然就不知道按按钮更新什么&lt;/p>
-&lt;p>查看目录元素，可以看到一堆viewpid
-&lt;figure>
-&lt;img class="my-0 rounded-md" loading="lazy" alt="image.png" src="https://godke.blog/imgs/20240424195950.png" />
-&lt;/figure>
-我们直接把整个目录元素复制下来，然后提取pid就行
-使用代码&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 正则表达式提取viewpid&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">template&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">r&lt;/span>&lt;span class="s2">&amp;#34;viewpid=\d&lt;/span>&lt;span class="si">{8}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">viewpid&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">re&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">findall&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">template&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">dic&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># dic即为目录元素&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后就是熟悉的破解网站的反爬虫机制
-目前来看只要请求不要太快好像完全没有反爬
-伪装一下headers就行，UA和cookies设置好似乎就没有问题了，其他的都不检查&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 获取请求header，主要是ua和cookie&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">headers&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;Accept&amp;#39;&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;*/*&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;Accept-Encoding&amp;#39;&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;gzip, deflate, br, zstd&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;Accept-Language&amp;#39;&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7,en-GB;q=0.6&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;Cookie&amp;#39;&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">你的cookies&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;User-Agent&amp;#39;&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 Edg/124.0.0.0&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>之后就是熟悉的分析爬到的东西了
-ajax的get申请返回的东西其实挺规整的，因为ajax框架有严格的格式要求，必须声明需要更新的部分
-但是这个作者的文章格式一团糟，完全没有章法，最后只能原封不动copy下来了&lt;/p>
-&lt;p>两个定位器都是ajax的固有内容&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 直接检索并提取内容&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">head&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">r&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;id=&amp;#34;postmessage_&amp;#34;&amp;#34;&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">tail&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">r&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;id=&amp;#34;comment_&amp;#34;&amp;#34;&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后就是简单的循环，读写，处理标题，整个文本格式化啥的，轻车熟路
-后续维护直接修改循环的开头就行，反正是apend模式&lt;/p>
-&lt;p>最后爬下来的东西和项目在
-&lt;a href="https://github.com/GodKeawa/zhouci" target="_blank">GodKeawa/zhouci: 一周一次买下同班同学的那些事 (github.com)&lt;/a>
-tips: 现已设置为 private&lt;/p></description></item><item><title>如何让微软输入法输出时间戳</title><link>https://godke.blog/posts/tech/%E5%A6%82%E4%BD%95%E8%AE%A9%E5%BE%AE%E8%BD%AF%E8%BE%93%E5%85%A5%E6%B3%95%E8%BE%93%E5%87%BA%E6%97%B6%E9%97%B4%E6%88%B3/</link><pubDate>Sun, 07 Apr 2024 14:28:04 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/%E5%A6%82%E4%BD%95%E8%AE%A9%E5%BE%AE%E8%BD%AF%E8%BE%93%E5%85%A5%E6%B3%95%E8%BE%93%E5%87%BA%E6%97%B6%E9%97%B4%E6%88%B3/</guid><description>&lt;p>输出时间戳是个好东西，但是非常多输入法都不提供自定义方法，如果提供多半就是十分阴间的大输入法&lt;/p>
-&lt;p>于是就去研究了一下微软输入法输出时间的方法，然后发现几乎都是无效的&lt;/p>
-&lt;p>特性上微软输入法确实会对&lt;code>%yyyy%&lt;/code>这种宏进行处理，但是阴间就阴间在win11以后，这种宏直接就提前转换了&lt;/p>
-&lt;p>网上大部分教程都是直接设置自定义短语，然后使用
-&lt;code>%yyyy%-%MM%-%dd% %HH%:%mm%:%ss%&lt;/code>
-然而实际上这样的短语定义根本就不是动态的，在输入这个短语后再次查看，就会发现短语已经被转译了
-也就是说之后每次输出都是固定的时间&lt;/p>
-&lt;p>这时候聪明人就会想了，那既然输入的时候会转译一次，那我再套一层不就行了
-于是输入自定义短语
-&lt;code>%%yyyy%%-%%MM%%-%%dd%% %%HH%%:%%mm%%:%%ss%%&lt;/code>
-打开一看，果然被消掉了一层，现在框里显示的是
-&lt;code>%yyyy%-%MM%-%dd% %HH%:%mm%:%ss%&lt;/code>
-这下总没有问题了吧&lt;/p>
-&lt;p>然后去输入，发现阴间输入法又不转译了，直接输出了
-&lt;code>%yyyy%-%MM%-%dd% %HH%:%mm%:%ss%&lt;/code>
-真是服了&lt;/p>
-&lt;p>之后去研究了一下微软输入法的特性，发现每次保存任意短语都会导致整个表被刷新转译一次
-也就是说每次保存像&lt;code>%yyyy%&lt;/code>这样的宏都会少一层&lt;/p>
-&lt;p>最后的解决方案竟然是
-先输入&lt;code>%%yyyy%%-%%MM%%-%%dd%% %%HH%%:%%mm%%:%%ss%%&lt;/code>但是选择2号（或者其他位置）
-然后再打开，修改成一号位置，保存
-然后就能正常使用了，虽然这时候时间定格在了保存的时间，但实际上输出的时间却应用了宏&lt;/p>
-&lt;p>简直是？？？
-并且每次修改自定义表的任何东西都要重设一次，简直蛋疼&lt;/p>
-&lt;p>不说了，直接安装quicker&lt;/p></description></item><item><title>如何白嫖Github Copilot并使用</title><link>https://godke.blog/posts/tech/%E5%A6%82%E4%BD%95%E7%99%BD%E5%AB%96github-copilot%E5%B9%B6%E4%BD%BF%E7%94%A8/</link><pubDate>Thu, 04 Apr 2024 22:05:51 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/%E5%A6%82%E4%BD%95%E7%99%BD%E5%AB%96github-copilot%E5%B9%B6%E4%BD%BF%E7%94%A8/</guid><description>&lt;p>开学季似乎有大量学生在申请Github学生包，而GitHub对这些申请又要人工审核，直接给我的申请拉满了时长，整整等了3天，不过总算还是通过了（写的等待时间是24-72小时）
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tech on GodKe.BLOG</title><link>https://godke.blog/categories/tech/</link><description>Recent content in Tech on GodKe.BLOG</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>3601262198@qq.com (GodKe)</managingEditor><webMaster>3601262198@qq.com (GodKe)</webMaster><copyright>Copyright © 2023 GodKe. All Rights Reserved.</copyright><lastBuildDate>Mon, 03 Jun 2024 15:51:38 +0800</lastBuildDate><atom:link href="https://godke.blog/categories/tech/index.xml" rel="self" type="application/rss+xml"/><item><title>破解游戏文件加密</title><link>https://godke.blog/posts/tech/%E7%A0%B4%E8%A7%A3%E6%B8%B8%E6%88%8F%E6%96%87%E4%BB%B6%E5%8A%A0%E5%AF%86/</link><pubDate>Mon, 03 Jun 2024 15:51:38 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/%E7%A0%B4%E8%A7%A3%E6%B8%B8%E6%88%8F%E6%96%87%E4%BB%B6%E5%8A%A0%E5%AF%86/</guid><description>&lt;p>俗话说，色色是宅男的第一生产力，当你看到游戏里有好看的色图时，第一反应肯定是想把它保存下来，以备后续“细细品鉴”，但是很多游戏就是喜欢搞点东西不让你保存，就算是用万能的截图大法也要给你放点游戏UI挡视野，这时候就只能解包了&lt;br>
+过去游戏解包非常的公式化，只要搞清楚了打包的加密方式就行，但是这次的吊人属实狠，直接把原图都给加密了，虽然把包给解了，但是包里面还有一层加密，属实是恶心至极&lt;br>
+必须干他一炮&lt;/p></description></item><item><title>ajax网站资源爬取</title><link>https://godke.blog/posts/tech/ajax%E7%BD%91%E7%AB%99%E8%B5%84%E6%BA%90%E7%88%AC%E5%8F%96/</link><pubDate>Wed, 24 Apr 2024 19:11:53 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/ajax%E7%BD%91%E7%AB%99%E8%B5%84%E6%BA%90%E7%88%AC%E5%8F%96/</guid><description>&lt;p>最近想看周次，然后发现这小说现在似乎比较新，文库版还在出，找了半天勉强找到一二卷的台版，后面都没出版，肯定是没希望了，只好跑去猪先生给的百合会帖子下看&lt;/p></description></item><item><title>如何让微软输入法输出时间戳</title><link>https://godke.blog/posts/tech/%E5%A6%82%E4%BD%95%E8%AE%A9%E5%BE%AE%E8%BD%AF%E8%BE%93%E5%85%A5%E6%B3%95%E8%BE%93%E5%87%BA%E6%97%B6%E9%97%B4%E6%88%B3/</link><pubDate>Sun, 07 Apr 2024 14:28:04 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/%E5%A6%82%E4%BD%95%E8%AE%A9%E5%BE%AE%E8%BD%AF%E8%BE%93%E5%85%A5%E6%B3%95%E8%BE%93%E5%87%BA%E6%97%B6%E9%97%B4%E6%88%B3/</guid><description>&lt;p>输出时间戳是个好东西，但是非常多输入法都不提供自定义方法，如果提供多半就是十分阴间的大输入法&lt;/p></description></item><item><title>如何白嫖Github Copilot并使用</title><link>https://godke.blog/posts/tech/%E5%A6%82%E4%BD%95%E7%99%BD%E5%AB%96github-copilot%E5%B9%B6%E4%BD%BF%E7%94%A8/</link><pubDate>Thu, 04 Apr 2024 22:05:51 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/%E5%A6%82%E4%BD%95%E7%99%BD%E5%AB%96github-copilot%E5%B9%B6%E4%BD%BF%E7%94%A8/</guid><description>&lt;p>开学季似乎有大量学生在申请Github学生包，而GitHub对这些申请又要人工审核，直接给我的申请拉满了时长，整整等了3天，不过总算还是通过了（写的等待时间是24-72小时）
 &lt;figure>
 &lt;img class="my-0 rounded-md" loading="lazy" alt="image.png" src="https://godke.blog/imgs/20240404222526.jpg" />
 &lt;/figure>
@@ -126,112 +8,101 @@ tips: 现已设置为 private&lt;/p></description></item><item><title>如何让�
 &lt;figure>
 &lt;img class="my-0 rounded-md" loading="lazy" alt="" src="https://godke.blog/imgs/20240404221302.jpg" />
 &lt;/figure>
-&lt;/p>
-&lt;p>目前来说网上还是有挺多申请教程的，但是似乎都有些outdated，尤其是很多申请居然还需要填写各种东西&lt;/p>
-&lt;h1 class="relative group">使用教育邮箱
-&lt;div id="使用教育邮箱" class="anchor">&lt;/div>
+&lt;/p></description></item><item><title>WSL-06 kali-linux相关</title><link>https://godke.blog/posts/tech/wsl/wsl-06-kali-linux%E7%9B%B8%E5%85%B3/</link><pubDate>Tue, 02 Apr 2024 16:22:31 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/wsl/wsl-06-kali-linux%E7%9B%B8%E5%85%B3/</guid><description>&lt;h1 class="relative group">安装kali-linux
+&lt;div id="安装kali-linux" class="anchor">&lt;/div>
 &lt;span
 class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 &lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-style="text-decoration-line: none !important;" href="#%e4%bd%bf%e7%94%a8%e6%95%99%e8%82%b2%e9%82%ae%e7%ae%b1" aria-label="Anchor">#&lt;/a>
+style="text-decoration-line: none !important;" href="#%e5%ae%89%e8%a3%85kali-linux" aria-label="Anchor">#&lt;/a>
 &lt;/span>
 &lt;/h1>
-&lt;p>目前的经验是，最好有一个教育邮箱绑定到自己的GitHub账号上，这样申请时选择教育邮箱再接个验证码认证一下，就可以直接进入提交材料的环节了&lt;/p>
-&lt;h1 class="relative group">使用dns加速
-&lt;div id="使用dns加速" class="anchor">&lt;/div>
+&lt;p>直接在WSL2上选择kali-linux安装即可&lt;/p></description></item><item><title>WSL-05 WSL迁移</title><link>https://godke.blog/posts/tech/wsl/wsl-05-wsl%E8%BF%81%E7%A7%BB/</link><pubDate>Mon, 01 Apr 2024 21:53:46 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/wsl/wsl-05-wsl%E8%BF%81%E7%A7%BB/</guid><description>&lt;p>&lt;strong>WSL迁移不止是为了给C盘腾空间，也是为了方便进行备份&lt;/strong>&lt;/p>
+&lt;h2 class="relative group">查看WSL状态
+&lt;div id="查看wsl状态" class="anchor">&lt;/div>
 &lt;span
 class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 &lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-style="text-decoration-line: none !important;" href="#%e4%bd%bf%e7%94%a8dns%e5%8a%a0%e9%80%9f" aria-label="Anchor">#&lt;/a>
+style="text-decoration-line: none !important;" href="#%e6%9f%a5%e7%9c%8bwsl%e7%8a%b6%e6%80%81" aria-label="Anchor">#&lt;/a>
 &lt;/span>
-&lt;/h1>
-&lt;p>有很多教程都说不能开加速器，因为会要求共享地理位置，但实际上加速也有很多类型
-这里推荐watt toolkit（原steam++）的host模式加速
-原理就是中国的墙实际上是对steam进行dns污染，如果你使用中国的dns服务，那多半会被拒绝访问
-但是也有很多dns服务是不墙steam的，比如cloudflare的，watt toolkit就支持让你直接使用指定的dns
-这样你的ip地址和其他信息并没有变，只是为你提供域名解析服务的服务商变了，是可以通过地理认证的&lt;/p>
-&lt;p>不过我直接用校园网访问，似乎没有问题&lt;/p>
-&lt;h1 class="relative group">提交材料
-&lt;div id="提交材料" class="anchor">&lt;/div>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">WSL -l -v
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">如果Running运行状态，关掉它
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WSL --shutdown
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+&lt;h2 class="relative group">导出系统镜像
+&lt;div id="导出系统镜像" class="anchor">&lt;/div>
 &lt;span
 class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 &lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-style="text-decoration-line: none !important;" href="#%e6%8f%90%e4%ba%a4%e6%9d%90%e6%96%99" aria-label="Anchor">#&lt;/a>
+style="text-decoration-line: none !important;" href="#%e5%af%bc%e5%87%ba%e7%b3%bb%e7%bb%9f%e9%95%9c%e5%83%8f" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">WSL --export Ubuntu E:&lt;span class="se">\U&lt;/span>buntu&lt;span class="se">\u&lt;/span>buntu.tar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在路径下有了Ubuntu的压缩包，可以把这个压缩包备份，也可以直接导出到备份盘里，主文件并不受影响&lt;/p></description></item><item><title>WSL-04 开发环境配置</title><link>https://godke.blog/posts/tech/wsl/wsl-04-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 01 Apr 2024 11:30:51 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/wsl/wsl-04-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid><description>&lt;h1 class="relative group">编译环境
+&lt;div id="编译环境" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e7%bc%96%e8%af%91%e7%8e%af%e5%a2%83" aria-label="Anchor">#&lt;/a>
 &lt;/span>
 &lt;/h1>
-&lt;p>提交材料的初审是AI进行了，似乎只是检测一下有没有关键信息和材料的形式&lt;/p>
-&lt;p>目前的建议是&lt;/p>
-&lt;ul>
-&lt;li>填写好GitHub账号的各种信息，最好和你准备提交的材料强相关&lt;/li>
-&lt;li>填写好付款信息
-&lt;ul>
-&lt;li>这里注意一下最好不要填中国的地址，因为中国地址会禁止付款（中国政府规定的）&lt;/li>
-&lt;li>反正我的已经禁止付款了，而且修改不了，如果是外国地址后续还可以修改&lt;/li>
-&lt;li>不过不影响申请，还是能白嫖&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>设置好2FA，现在已经是强制要求了，可以用edge的插件，个人建议还是伪装成美国人，如果用edge插件一定要到插件设置页面做一个备份，2FA的恢复码也保存一下，不然你就会体验手机丢了要登录电脑微信的感觉
-&lt;ul>
-&lt;li>给你的某个设备（不能是华为）刷一个国际版安卓&lt;/li>
-&lt;li>安装代理和GMS&lt;/li>
-&lt;li>创建一个gmail&lt;/li>
-&lt;li>愉快地使用Google play&lt;/li>
-&lt;li>使用任意2FA软件，同步到云&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>材料使用翻译过的学信网认证材料
-&lt;ul>
-&lt;li>学信网下载学籍验证报告
-&lt;ul>
-&lt;li>&lt;a href="https://my.chsi.com.cn/archive/bab/index.action" target="_blank">学信档案 (chsi.com.cn)&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>使用GitHub开源项目翻译报告
-&lt;ul>
-&lt;li>&lt;a href="https://github.com/Nagi-ovo/CHSI-Converter" target="_blank">Nagi-ovo/CHSI-Converter: 在线一键转化英文版学信档案 (github.com)&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>自己用word稍微调整一下格式然后做成pdf&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>一定要直接用手机拍，如果有条件可以把学生证和一卡通也拍进去，反正AI会检测各种信息
-&lt;ul>
-&lt;li>反正我是直接拍了报告就通过了&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;p>通过以后就是漫长的等待，似乎也不用自己主动领取，到账了直接上GitHub就能看到自己已经是GitHub Pro了&lt;/p></description></item><item><title>系统环境变量配置不生效</title><link>https://godke.blog/posts/tech/%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E4%B8%8D%E7%94%9F%E6%95%88/</link><pubDate>Thu, 28 Mar 2024 11:30:51 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E4%B8%8D%E7%94%9F%E6%95%88/</guid><description>&lt;p>&lt;strong>重启解决99%的问题&lt;/strong>&lt;/p>
+&lt;p>实际上没有什么好配置的，Ubuntu天生就是拿来搞开发的&lt;br>
+直接安装GNU工具链&lt;br>
+&lt;code>sudo apt install binutils diffutils gcc gdb grep g++ make tar&lt;/code>&lt;br>
+其实就已经差不多了，只是要依赖自己在终端编译运行，习惯就好&lt;br>
+python3现在ubuntu自带的都是3.10.12版本，而且是系统必备库&lt;/p></description></item><item><title>WSL-03 GUI界面</title><link>https://godke.blog/posts/tech/wsl/wsl-03-gui%E7%95%8C%E9%9D%A2/</link><pubDate>Fri, 29 Mar 2024 19:49:21 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/wsl/wsl-03-gui%E7%95%8C%E9%9D%A2/</guid><description>&lt;h1 class="relative group">给WSL安装桌面
+&lt;div id="给wsl安装桌面" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e7%bb%99wsl%e5%ae%89%e8%a3%85%e6%a1%8c%e9%9d%a2" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h1>
+&lt;h2 class="relative group">踩坑经历
+&lt;div id="踩坑经历" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e8%b8%a9%e5%9d%91%e7%bb%8f%e5%8e%86" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h2>
+&lt;p>网上还是有很多先辈尝试过的&lt;/p></description></item><item><title>WSL-02 配置网络代理和远程访问</title><link>https://godke.blog/posts/tech/wsl/wsl-02-%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</link><pubDate>Thu, 28 Mar 2024 11:43:23 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/wsl/wsl-02-%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</guid><description>&lt;h1 class="relative group">配置VScode进行远程开发
+&lt;div id="配置vscode进行远程开发" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e9%85%8d%e7%bd%aevscode%e8%bf%9b%e8%a1%8c%e8%bf%9c%e7%a8%8b%e5%bc%80%e5%8f%91" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h1>
+&lt;p>现在的Ubuntu就是一个精简的系统，里面几乎什么都没有，也没有GUI，用控制台进行后续操作十分麻烦，所以应该趁早用上VScode的远程开发
+微软的官方教程非常详细&lt;a href="https://learn.microsoft.com/zh-cn/windows/WSL/tutorials/WSL-vscode" target="_blank">开始通过 WSL 使用 VS Code | Microsoft Learn&lt;/a>&lt;/p></description></item><item><title>系统环境变量配置不生效</title><link>https://godke.blog/posts/tech/%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E4%B8%8D%E7%94%9F%E6%95%88/</link><pubDate>Thu, 28 Mar 2024 11:30:51 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E4%B8%8D%E7%94%9F%E6%95%88/</guid><description>&lt;p>&lt;strong>重启解决99%的问题&lt;/strong>&lt;/p>
 &lt;p>非常值得吐槽的是系统环境变量竟然就存储在一个文件里
 在powershell里使用命令&lt;code>$env:Path&lt;/code>即可查看文件内容
-你甚至可以通过命令&lt;code>$env:Path += &amp;quot;;&amp;lt;路径&amp;gt;&amp;quot;&lt;/code>来实现对path的增加(&lt;strong>并不全局，见下文&lt;/strong>)&lt;/p>
-&lt;p>既然是文件，就会有一个很蛋疼的地方
-——对单个软件（或者其他使用path的程序）来说不实时更新&lt;/p>
-&lt;p>比如说你打开了一个软件，这个软件需要你把某个路径加入path，这样软件才能正确调用&lt;/p>
-&lt;ul>
-&lt;li>首先你运行软件，发现报错了，显示找不到可执行文件&lt;/li>
-&lt;li>然后你去搜了一下，发现是某个东西没加进path，软件检索不到&lt;/li>
-&lt;li>于是你更改了path，但是没有重启软件，再次运行，还是检索不到&lt;/li>
-&lt;li>这是因为软件启动时已经将path文件读入了，且不会故意再去读&lt;/li>
-&lt;li>所以重启软件就能解决&lt;/li>
-&lt;/ul>
-&lt;p>但是更为惊喜的是我遇到的情况&lt;/p>
-&lt;ul>
-&lt;li>众所周知一些软件是可以唤出powershell的，比如我用的github desktop&lt;/li>
-&lt;li>原本我认为powershell是单独的软件，启动时应该是自行初始化的&lt;/li>
-&lt;li>但事实是，如果你不重启github desktop,无论你重启多少次powershell，这个powershell就是不更新path，甚至你调用&lt;code>$env:Path&lt;/code>方法读取到的内容也没有更新&lt;/li>
-&lt;li>也就是说，由软件唤起的powershell会继承软件的一部分数据，包括读取到的path&lt;/li>
-&lt;li>而&lt;code>$env:Path&lt;/code>方法并不是读取全局的path&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>经过一些调查可以发现&lt;/strong>
-在 Windows 上，环境变量可以在三个作用域内定义：&lt;/p>
-&lt;ul>
-&lt;li>计算机（或系统）作用域&lt;/li>
-&lt;li>用户范围&lt;/li>
-&lt;li>流程范围&lt;/li>
-&lt;/ul>
-&lt;p>&lt;em>Process&lt;/em> 作用域包含当前进程或 PowerShell 会话中可用的环境变量。 该变量列表&lt;strong>继承自父进程&lt;/strong>，并由 &lt;em>Machine&lt;/em> 和 &lt;em>User&lt;/em> 作用域中的变量构造而成。&lt;/p>
-&lt;p>&lt;strong>在 PowerShell 中更改环境变量时，更改仅影响当前会话&lt;/strong>。 此行为类似于 Windows 命令外壳中的 &lt;code>set&lt;/code> 命令和基于 UNIX 的环境中的 &lt;code>setenv&lt;/code> 命令的行为。 要更改 Machine 或 User 作用域中的值，必须使用 &lt;strong>System.Environment&lt;/strong> 类的方法。&lt;/p>
-&lt;p>要更改计算机作用域的变量，还必须拥有相应权限。 如果你尝试在没有足够权限的情况下更改值，该命令将失败并且 PowerShell 将显示错误。&lt;/p></description></item><item><title>如何调试微信中的网页</title><link>https://godke.blog/posts/tech/%E5%A6%82%E4%BD%95%E8%B0%83%E8%AF%95%E5%BE%AE%E4%BF%A1%E4%B8%AD%E7%9A%84%E7%BD%91%E9%A1%B5/</link><pubDate>Wed, 20 Mar 2024 20:57:06 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/%E5%A6%82%E4%BD%95%E8%B0%83%E8%AF%95%E5%BE%AE%E4%BF%A1%E4%B8%AD%E7%9A%84%E7%BD%91%E9%A1%B5/</guid><description>&lt;h1 class="relative group">导言
+你甚至可以通过命令&lt;code>$env:Path += &amp;quot;;&amp;lt;路径&amp;gt;&amp;quot;&lt;/code>来实现对path的增加(&lt;strong>并不全局，见下文&lt;/strong>)&lt;/p></description></item><item><title>WSL-01 安装WSL和Ubuntu</title><link>https://godke.blog/posts/tech/wsl/wsl-01-%E5%AE%89%E8%A3%85wsl%E5%92%8Cubuntu/</link><pubDate>Wed, 27 Mar 2024 21:53:46 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/wsl/wsl-01-%E5%AE%89%E8%A3%85wsl%E5%92%8Cubuntu/</guid><description>&lt;h1 class="relative group">写在前面
+&lt;div id="写在前面" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e5%86%99%e5%9c%a8%e5%89%8d%e9%9d%a2" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h1>
+&lt;p>由于WSL2使用hyper-v的问题目前还没有解决，所以本人使用了一条新的道路&lt;/p></description></item><item><title>WHY WSL?</title><link>https://godke.blog/posts/tech/wsl/wsl-00-why/</link><pubDate>Wed, 27 Mar 2024 19:39:10 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/wsl/wsl-00-why/</guid><description>&lt;h1 class="relative group">为什么使用WSL
+&lt;div id="为什么使用wsl" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e4%bd%bf%e7%94%a8wsl" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h1>
+&lt;h2 class="relative group">为什么用WSL
+&lt;div id="为什么用wsl" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e7%94%a8wsl" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h2>
+&lt;p>在可能的选项中&lt;/p></description></item><item><title>如何调试微信中的网页</title><link>https://godke.blog/posts/tech/%E5%A6%82%E4%BD%95%E8%B0%83%E8%AF%95%E5%BE%AE%E4%BF%A1%E4%B8%AD%E7%9A%84%E7%BD%91%E9%A1%B5/</link><pubDate>Wed, 20 Mar 2024 20:57:06 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/%E5%A6%82%E4%BD%95%E8%B0%83%E8%AF%95%E5%BE%AE%E4%BF%A1%E4%B8%AD%E7%9A%84%E7%BD%91%E9%A1%B5/</guid><description>&lt;h1 class="relative group">导言
 &lt;div id="导言" class="anchor">&lt;/div>
 &lt;span
 class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -240,45 +111,4 @@ style="text-decoration-line: none !important;" href="#%e5%af%bc%e8%a8%80" aria-l
 &lt;/span>
 &lt;/h1>
 &lt;blockquote>
-&lt;p>众所周知，微信作为一款优秀的国产app，以其离谱的大小著称，且不谈其内置的输入法有多么的离谱，仅仅是微信内置的浏览器就已经技惊四座，作为一个使用CEF(&lt;a href="https://www.chromium.org/Home" target="_blank">Chromium Embedded Framework (CEF)&lt;/a> 是一个基于Google Chromium的开源项目)的软件，它&lt;strong>为了减少客户对微信体积过大的怨恨，&lt;em>善良&lt;/em>地将浏览器内置的调试工具删除了&lt;/strong>，导致我们无法对微信内的网页做任何操作，那么有什么办法可以解决呢？&lt;/p>&lt;/blockquote>
-&lt;h1 class="relative group">User-Agent + Cookie（拉跨）
-&lt;div id="user-agent--cookie拉跨" class="anchor">&lt;/div>
-&lt;span
-class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-style="text-decoration-line: none !important;" href="#user-agent--cookie%e6%8b%89%e8%b7%a8" aria-label="Anchor">#&lt;/a>
-&lt;/span>
-&lt;/h1>
-&lt;h2 class="relative group">微信的User-Agent检查
-&lt;div id="微信的user-agent检查" class="anchor">&lt;/div>
-&lt;span
-class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-style="text-decoration-line: none !important;" href="#%e5%be%ae%e4%bf%a1%e7%9a%84user-agent%e6%a3%80%e6%9f%a5" aria-label="Anchor">#&lt;/a>
-&lt;/span>
-&lt;/h2>
-&lt;p>当你尝试用浏览器打开一部分微信内网页时，微信就会善良地提醒你
-&lt;figure>
-&lt;img class="my-0 rounded-md" loading="lazy" alt="" src="https://godke.blog/imgs/20240309134251.jpg" />
-&lt;/figure>
-&lt;/p>
-&lt;p>这时我们查看网页源代码，就会发现这样一段检查&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&amp;lt;!DOCTYPE html&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">meta&lt;/span> &lt;span class="na">name&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;viewport&amp;#34;&lt;/span> &lt;span class="na">content&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;width=device-width, initial-scale=1, user-scalable=0&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;text/javascript&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">ua&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">navigator&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">userAgent&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">toLowerCase&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">isWeixin&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">ua&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">indexOf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;micromessenger&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">//isWeixin
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nx">isAndroid&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">ua&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">indexOf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;android&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">isIos&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">ua&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">indexOf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;iphone&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">ua&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">indexOf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;ipad&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">isWeixin&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">head&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">innerHTML&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;lt;title&amp;gt;抱歉，出错了&amp;lt;/title&amp;gt;&amp;lt;meta charset=&amp;#34;utf-8&amp;#34;&amp;gt;&amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1, user-scalable=0&amp;#34;&amp;gt;&amp;lt;link rel=&amp;#34;stylesheet&amp;#34; type=&amp;#34;text/css&amp;#34; href=&amp;#34;https://res.wx.qq.com/open/libs/weui/0.4.1/weui.css&amp;#34;&amp;gt;&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">innerHTML&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;lt;div class=&amp;#34;weui_msg&amp;#34;&amp;gt;&amp;lt;div class=&amp;#34;weui_icon_area&amp;#34;&amp;gt;&amp;lt;i class=&amp;#34;weui_icon_info weui_icon_msg&amp;#34;&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div class=&amp;#34;weui_text_area&amp;#34;&amp;gt;&amp;lt;h4 class=&amp;#34;weui_msg_title&amp;#34;&amp;gt;请在微信客户端打开链接&amp;lt;/h4&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>不难发现isWeixin的检查是看UA里有没有micromessenger，它还善良地开了大小写兼容，我哭死&lt;/p></description></item></channel></rss>
+&lt;p>众所周知，微信作为一款优秀的国产app，以其离谱的大小著称，且不谈其内置的输入法有多么的离谱，仅仅是微信内置的浏览器就已经技惊四座，作为一个使用CEF(&lt;a href="https://www.chromium.org/Home" target="_blank">Chromium Embedded Framework (CEF)&lt;/a> 是一个基于Google Chromium的开源项目)的软件，它&lt;strong>为了减少客户对微信体积过大的怨恨，&lt;em>善良&lt;/em>地将浏览器内置的调试工具删除了&lt;/strong>，导致我们无法对微信内的网页做任何操作，那么有什么办法可以解决呢？&lt;/p></description></item></channel></rss>

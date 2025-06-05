@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on GodKe.BLOG</title><link>https://godke.blog/tags/linux/</link><description>Recent content in Linux on GodKe.BLOG</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>3601262198@qq.com (GodKe)</managingEditor><webMaster>3601262198@qq.com (GodKe)</webMaster><copyright>Copyright © 2023 GodKe. All Rights Reserved.</copyright><lastBuildDate>Wed, 27 Mar 2024 19:39:10 +0800</lastBuildDate><atom:link href="https://godke.blog/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>WHY WSL?</title><link>https://godke.blog/posts/tech/wsl/wsl-00-why/</link><pubDate>Wed, 27 Mar 2024 19:39:10 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/wsl/wsl-00-why/</guid><description>&lt;h1 class="relative group">为什么使用WSL
+&lt;div id="为什么使用wsl" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e4%bd%bf%e7%94%a8wsl" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h1>
+&lt;h2 class="relative group">为什么用WSL
+&lt;div id="为什么用wsl" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e7%94%a8wsl" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h2>
+&lt;p>在可能的选项中&lt;/p></description></item></channel></rss>

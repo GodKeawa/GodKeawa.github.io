@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git on GodKe.BLOG</title><link>https://godke.blog/tags/git/</link><description>Recent content in Git on GodKe.BLOG</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>3601262198@qq.com (GodKe)</managingEditor><webMaster>3601262198@qq.com (GodKe)</webMaster><copyright>Copyright © 2023 GodKe. All Rights Reserved.</copyright><lastBuildDate>Thu, 14 Mar 2024 17:40:59 +0800</lastBuildDate><atom:link href="https://godke.blog/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>web-02 Github deploy</title><link>https://godke.blog/posts/website/old/web-02-%E9%83%A8%E7%BD%B2%E7%BD%91%E9%A1%B5/</link><pubDate>Thu, 14 Mar 2024 17:40:59 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/website/old/web-02-%E9%83%A8%E7%BD%B2%E7%BD%91%E9%A1%B5/</guid><description>&lt;p>网页放在本地服务器上肯定是毫无价值的，所以我们要将它发布到互联网上
+方法有很多，最方便的就是白嫖github pages，缺点就是只能部署静态网页
+后续可能会部署到树莓派上&lt;/p></description></item><item><title>web-01 hexo框架</title><link>https://godke.blog/posts/website/old/web-01-%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</link><pubDate>Tue, 12 Mar 2024 19:58:24 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/website/old/web-01-%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</guid><description>&lt;h1 class="relative group">git学习
+&lt;div id="git学习" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#git%e5%ad%a6%e4%b9%a0" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h1>
+&lt;p>由于github是基于git的网站，所以熟练运用git是必不可少的
+无论你使用什么框架，最后还是要用git上传和部署&lt;/p></description></item></channel></rss>

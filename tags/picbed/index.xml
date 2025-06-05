@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Picbed on GodKe.BLOG</title><link>https://godke.blog/tags/picbed/</link><description>Recent content in Picbed on GodKe.BLOG</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>3601262198@qq.com (GodKe)</managingEditor><webMaster>3601262198@qq.com (GodKe)</webMaster><copyright>Copyright © 2023 GodKe. All Rights Reserved.</copyright><lastBuildDate>Sat, 23 Mar 2024 17:51:31 +0800</lastBuildDate><atom:link href="https://godke.blog/tags/picbed/index.xml" rel="self" type="application/rss+xml"/><item><title>web-06 国内网络加速</title><link>https://godke.blog/posts/website/old/web-06-%E5%9B%BD%E5%86%85%E7%BD%91%E7%BB%9C%E5%8A%A0%E9%80%9F/</link><pubDate>Sat, 23 Mar 2024 17:51:31 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/website/old/web-06-%E5%9B%BD%E5%86%85%E7%BD%91%E7%BB%9C%E5%8A%A0%E9%80%9F/</guid><description>&lt;h2 class="relative group">开启cloudflare
+&lt;div id="开启cloudflare" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e5%bc%80%e5%90%afcloudflare" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>打开cloudflare官网，照着提示做，把自己的域名交给cloudflare管理即可，选免费计划&lt;br>
+这里比较技术性的就只有修改自己域名的namesevers，这个得看你在哪买的域名&lt;br>
+总之cloudflare会为你提供两个namesever&lt;/p></description></item><item><title>web-05 自建图床</title><link>https://godke.blog/posts/website/old/web-05-%E8%87%AA%E5%BB%BA%E5%9B%BE%E5%BA%8A/</link><pubDate>Fri, 22 Mar 2024 11:33:37 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/website/old/web-05-%E8%87%AA%E5%BB%BA%E5%9B%BE%E5%BA%8A/</guid><description>&lt;h2 class="relative group">图床搭建
+&lt;div id="图床搭建" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e5%9b%be%e5%ba%8a%e6%90%ad%e5%bb%ba" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h2>
+&lt;ol>
+&lt;li>登录你的 Github 之后，创建一个新的仓库
+&lt;figure>
+&lt;img class="my-0 rounded-md" loading="lazy" alt="" src="https://pic3.zhimg.com/80/v2-bdae2009a14221c498dbde14714f951e_1440w.webp" />
+&lt;/figure>
+&lt;/li>
+&lt;li>填写仓库先关资料，一般只需要选一个合适的仓库名，然后确保仓库为 &lt;code>public&lt;/code> 其他的保持默认就好
+&lt;figure>
+&lt;img class="my-0 rounded-md" loading="lazy" alt="" src="https://pic4.zhimg.com/80/v2-79c5e7f0d53bf92b27ade85b244aadcf_1440w.webp" />
+&lt;/figure>
+&lt;/li>
+&lt;li>一般创建成功之后，会出现如下界面，至此，我们的图床算是创建好了，接下来就是如何上传图片了；
+&lt;figure>
+&lt;img class="my-0 rounded-md" loading="lazy" alt="" src="https://pic3.zhimg.com/80/v2-569e9028620c1d14a8e92dc58647b506_1440w.webp" />
+&lt;/figure>
+&lt;/li>
+&lt;/ol>
+&lt;h2 class="relative group">上传图片
+&lt;div id="上传图片" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e4%b8%8a%e4%bc%a0%e5%9b%be%e7%89%87" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h2>
+&lt;p>通过上面的步骤，我们的图床时搭建好了，但是通过传统的方法向 Github 上传图片太麻烦了，这里我们推荐使用一个开源图床工具 &lt;a href="https://link.zhihu.com/?target=https%3A//molunerfinn.com/PicGo/" target="_blank">PicGo&lt;/a> 来作为我们的图片上传工具；&lt;/p></description></item></channel></rss>

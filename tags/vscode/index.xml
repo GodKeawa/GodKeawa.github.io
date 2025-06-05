@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vscode on GodKe.BLOG</title><link>https://godke.blog/tags/vscode/</link><description>Recent content in Vscode on GodKe.BLOG</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>3601262198@qq.com (GodKe)</managingEditor><webMaster>3601262198@qq.com (GodKe)</webMaster><copyright>Copyright © 2023 GodKe. All Rights Reserved.</copyright><lastBuildDate>Mon, 01 Apr 2024 11:30:51 +0800</lastBuildDate><atom:link href="https://godke.blog/tags/vscode/index.xml" rel="self" type="application/rss+xml"/><item><title>WSL-04 开发环境配置</title><link>https://godke.blog/posts/tech/wsl/wsl-04-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 01 Apr 2024 11:30:51 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/wsl/wsl-04-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid><description>&lt;h1 class="relative group">编译环境
+&lt;div id="编译环境" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e7%bc%96%e8%af%91%e7%8e%af%e5%a2%83" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h1>
+&lt;p>实际上没有什么好配置的，Ubuntu天生就是拿来搞开发的&lt;br>
+直接安装GNU工具链&lt;br>
+&lt;code>sudo apt install binutils diffutils gcc gdb grep g++ make tar&lt;/code>&lt;br>
+其实就已经差不多了，只是要依赖自己在终端编译运行，习惯就好&lt;br>
+python3现在ubuntu自带的都是3.10.12版本，而且是系统必备库&lt;/p></description></item><item><title>WSL-02 配置网络代理和远程访问</title><link>https://godke.blog/posts/tech/wsl/wsl-02-%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</link><pubDate>Thu, 28 Mar 2024 11:43:23 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/wsl/wsl-02-%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</guid><description>&lt;h1 class="relative group">配置VScode进行远程开发
+&lt;div id="配置vscode进行远程开发" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e9%85%8d%e7%bd%aevscode%e8%bf%9b%e8%a1%8c%e8%bf%9c%e7%a8%8b%e5%bc%80%e5%8f%91" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h1>
+&lt;p>现在的Ubuntu就是一个精简的系统，里面几乎什么都没有，也没有GUI，用控制台进行后续操作十分麻烦，所以应该趁早用上VScode的远程开发
+微软的官方教程非常详细&lt;a href="https://learn.microsoft.com/zh-cn/windows/WSL/tutorials/WSL-vscode" target="_blank">开始通过 WSL 使用 VS Code | Microsoft Learn&lt;/a>&lt;/p></description></item></channel></rss>

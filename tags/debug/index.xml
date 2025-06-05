@@ -7,45 +7,4 @@ style="text-decoration-line: none !important;" href="#%e5%af%bc%e8%a8%80" aria-l
 &lt;/span>
 &lt;/h1>
 &lt;blockquote>
-&lt;p>众所周知，微信作为一款优秀的国产app，以其离谱的大小著称，且不谈其内置的输入法有多么的离谱，仅仅是微信内置的浏览器就已经技惊四座，作为一个使用CEF(&lt;a href="https://www.chromium.org/Home" target="_blank">Chromium Embedded Framework (CEF)&lt;/a> 是一个基于Google Chromium的开源项目)的软件，它&lt;strong>为了减少客户对微信体积过大的怨恨，&lt;em>善良&lt;/em>地将浏览器内置的调试工具删除了&lt;/strong>，导致我们无法对微信内的网页做任何操作，那么有什么办法可以解决呢？&lt;/p>&lt;/blockquote>
-&lt;h1 class="relative group">User-Agent + Cookie（拉跨）
-&lt;div id="user-agent--cookie拉跨" class="anchor">&lt;/div>
-&lt;span
-class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-style="text-decoration-line: none !important;" href="#user-agent--cookie%e6%8b%89%e8%b7%a8" aria-label="Anchor">#&lt;/a>
-&lt;/span>
-&lt;/h1>
-&lt;h2 class="relative group">微信的User-Agent检查
-&lt;div id="微信的user-agent检查" class="anchor">&lt;/div>
-&lt;span
-class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-style="text-decoration-line: none !important;" href="#%e5%be%ae%e4%bf%a1%e7%9a%84user-agent%e6%a3%80%e6%9f%a5" aria-label="Anchor">#&lt;/a>
-&lt;/span>
-&lt;/h2>
-&lt;p>当你尝试用浏览器打开一部分微信内网页时，微信就会善良地提醒你
-&lt;figure>
-&lt;img class="my-0 rounded-md" loading="lazy" alt="" src="https://godke.blog/imgs/20240309134251.jpg" />
-&lt;/figure>
-&lt;/p>
-&lt;p>这时我们查看网页源代码，就会发现这样一段检查&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&amp;lt;!DOCTYPE html&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">meta&lt;/span> &lt;span class="na">name&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;viewport&amp;#34;&lt;/span> &lt;span class="na">content&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;width=device-width, initial-scale=1, user-scalable=0&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;text/javascript&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">ua&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">navigator&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">userAgent&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">toLowerCase&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">isWeixin&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">ua&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">indexOf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;micromessenger&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">//isWeixin
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nx">isAndroid&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">ua&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">indexOf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;android&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">isIos&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">ua&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">indexOf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;iphone&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">ua&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">indexOf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;ipad&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">isWeixin&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">head&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">innerHTML&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;lt;title&amp;gt;抱歉，出错了&amp;lt;/title&amp;gt;&amp;lt;meta charset=&amp;#34;utf-8&amp;#34;&amp;gt;&amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1, user-scalable=0&amp;#34;&amp;gt;&amp;lt;link rel=&amp;#34;stylesheet&amp;#34; type=&amp;#34;text/css&amp;#34; href=&amp;#34;https://res.wx.qq.com/open/libs/weui/0.4.1/weui.css&amp;#34;&amp;gt;&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">body&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">innerHTML&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;lt;div class=&amp;#34;weui_msg&amp;#34;&amp;gt;&amp;lt;div class=&amp;#34;weui_icon_area&amp;#34;&amp;gt;&amp;lt;i class=&amp;#34;weui_icon_info weui_icon_msg&amp;#34;&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div class=&amp;#34;weui_text_area&amp;#34;&amp;gt;&amp;lt;h4 class=&amp;#34;weui_msg_title&amp;#34;&amp;gt;请在微信客户端打开链接&amp;lt;/h4&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;/div&amp;gt;&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>不难发现isWeixin的检查是看UA里有没有micromessenger，它还善良地开了大小写兼容，我哭死&lt;/p></description></item></channel></rss>
+&lt;p>众所周知，微信作为一款优秀的国产app，以其离谱的大小著称，且不谈其内置的输入法有多么的离谱，仅仅是微信内置的浏览器就已经技惊四座，作为一个使用CEF(&lt;a href="https://www.chromium.org/Home" target="_blank">Chromium Embedded Framework (CEF)&lt;/a> 是一个基于Google Chromium的开源项目)的软件，它&lt;strong>为了减少客户对微信体积过大的怨恨，&lt;em>善良&lt;/em>地将浏览器内置的调试工具删除了&lt;/strong>，导致我们无法对微信内的网页做任何操作，那么有什么办法可以解决呢？&lt;/p></description></item></channel></rss>

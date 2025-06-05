@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gnome on GodKe.BLOG</title><link>https://godke.blog/tags/gnome/</link><description>Recent content in Gnome on GodKe.BLOG</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>3601262198@qq.com (GodKe)</managingEditor><webMaster>3601262198@qq.com (GodKe)</webMaster><copyright>Copyright © 2023 GodKe. All Rights Reserved.</copyright><lastBuildDate>Fri, 29 Mar 2024 19:49:21 +0800</lastBuildDate><atom:link href="https://godke.blog/tags/gnome/index.xml" rel="self" type="application/rss+xml"/><item><title>WSL-03 GUI界面</title><link>https://godke.blog/posts/tech/wsl/wsl-03-gui%E7%95%8C%E9%9D%A2/</link><pubDate>Fri, 29 Mar 2024 19:49:21 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/wsl/wsl-03-gui%E7%95%8C%E9%9D%A2/</guid><description>&lt;h1 class="relative group">给WSL安装桌面
+&lt;div id="给wsl安装桌面" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e7%bb%99wsl%e5%ae%89%e8%a3%85%e6%a1%8c%e9%9d%a2" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h1>
+&lt;h2 class="relative group">踩坑经历
+&lt;div id="踩坑经历" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e8%b8%a9%e5%9d%91%e7%bb%8f%e5%8e%86" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h2>
+&lt;p>网上还是有很多先辈尝试过的&lt;/p></description></item></channel></rss>

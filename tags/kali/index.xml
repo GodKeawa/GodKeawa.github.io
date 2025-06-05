@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kali on GodKe.BLOG</title><link>https://godke.blog/tags/kali/</link><description>Recent content in Kali on GodKe.BLOG</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>3601262198@qq.com (GodKe)</managingEditor><webMaster>3601262198@qq.com (GodKe)</webMaster><copyright>Copyright © 2023 GodKe. All Rights Reserved.</copyright><lastBuildDate>Tue, 02 Apr 2024 16:22:31 +0800</lastBuildDate><atom:link href="https://godke.blog/tags/kali/index.xml" rel="self" type="application/rss+xml"/><item><title>WSL-06 kali-linux相关</title><link>https://godke.blog/posts/tech/wsl/wsl-06-kali-linux%E7%9B%B8%E5%85%B3/</link><pubDate>Tue, 02 Apr 2024 16:22:31 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/wsl/wsl-06-kali-linux%E7%9B%B8%E5%85%B3/</guid><description>&lt;h1 class="relative group">安装kali-linux
+&lt;div id="安装kali-linux" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e5%ae%89%e8%a3%85kali-linux" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h1>
+&lt;p>直接在WSL2上选择kali-linux安装即可&lt;/p></description></item></channel></rss>

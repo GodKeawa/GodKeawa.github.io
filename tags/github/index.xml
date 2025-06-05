@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Github on GodKe.BLOG</title><link>https://godke.blog/tags/github/</link><description>Recent content in Github on GodKe.BLOG</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>3601262198@qq.com (GodKe)</managingEditor><webMaster>3601262198@qq.com (GodKe)</webMaster><copyright>Copyright © 2023 GodKe. All Rights Reserved.</copyright><lastBuildDate>Thu, 04 Apr 2024 22:05:51 +0800</lastBuildDate><atom:link href="https://godke.blog/tags/github/index.xml" rel="self" type="application/rss+xml"/><item><title>如何白嫖Github Copilot并使用</title><link>https://godke.blog/posts/tech/%E5%A6%82%E4%BD%95%E7%99%BD%E5%AB%96github-copilot%E5%B9%B6%E4%BD%BF%E7%94%A8/</link><pubDate>Thu, 04 Apr 2024 22:05:51 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/%E5%A6%82%E4%BD%95%E7%99%BD%E5%AB%96github-copilot%E5%B9%B6%E4%BD%BF%E7%94%A8/</guid><description>&lt;p>开学季似乎有大量学生在申请Github学生包，而GitHub对这些申请又要人工审核，直接给我的申请拉满了时长，整整等了3天，不过总算还是通过了（写的等待时间是24-72小时）
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Github on GodKe.BLOG</title><link>https://godke.blog/tags/github/</link><description>Recent content in Github on GodKe.BLOG</description><generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>3601262198@qq.com (GodKe)</managingEditor><webMaster>3601262198@qq.com (GodKe)</webMaster><copyright>Copyright © 2023 GodKe. All Rights Reserved.</copyright><lastBuildDate>Wed, 05 Jun 2024 13:17:34 +0800</lastBuildDate><atom:link href="https://godke.blog/tags/github/index.xml" rel="self" type="application/rss+xml"/><item><title>web-08 SSL证书问题处理</title><link>https://godke.blog/posts/website/old/web-08-ssl%E8%AF%81%E4%B9%A6%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/</link><pubDate>Wed, 05 Jun 2024 13:17:34 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/website/old/web-08-ssl%E8%AF%81%E4%B9%A6%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/</guid><description>&lt;p>众所周知啊，现在的浏览器对没有SSL证书的网站都是直接报不安全的，像华为和一些软件的内置浏览器直接就禁止访问了，所以要给网站加自定义域名，就得给域名申请一个SSL证书&lt;/p></description></item><item><title>如何白嫖Github Copilot并使用</title><link>https://godke.blog/posts/tech/%E5%A6%82%E4%BD%95%E7%99%BD%E5%AB%96github-copilot%E5%B9%B6%E4%BD%BF%E7%94%A8/</link><pubDate>Thu, 04 Apr 2024 22:05:51 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/tech/%E5%A6%82%E4%BD%95%E7%99%BD%E5%AB%96github-copilot%E5%B9%B6%E4%BD%BF%E7%94%A8/</guid><description>&lt;p>开学季似乎有大量学生在申请Github学生包，而GitHub对这些申请又要人工审核，直接给我的申请拉满了时长，整整等了3天，不过总算还是通过了（写的等待时间是24-72小时）
 &lt;figure>
 &lt;img class="my-0 rounded-md" loading="lazy" alt="image.png" src="https://godke.blog/imgs/20240404222526.jpg" />
 &lt;/figure>
@@ -6,78 +6,59 @@
 &lt;figure>
 &lt;img class="my-0 rounded-md" loading="lazy" alt="" src="https://godke.blog/imgs/20240404221302.jpg" />
 &lt;/figure>
-&lt;/p>
-&lt;p>目前来说网上还是有挺多申请教程的，但是似乎都有些outdated，尤其是很多申请居然还需要填写各种东西&lt;/p>
-&lt;h1 class="relative group">使用教育邮箱
-&lt;div id="使用教育邮箱" class="anchor">&lt;/div>
+&lt;/p></description></item><item><title>web-07 网站维护</title><link>https://godke.blog/posts/website/old/web-07-%E7%BD%91%E7%AB%99%E7%BB%B4%E6%8A%A4/</link><pubDate>Mon, 25 Mar 2024 16:22:31 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/website/old/web-07-%E7%BD%91%E7%AB%99%E7%BB%B4%E6%8A%A4/</guid><description>&lt;h2 class="relative group">网站资源问题
+&lt;div id="网站资源问题" class="anchor">&lt;/div>
 &lt;span
 class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 &lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-style="text-decoration-line: none !important;" href="#%e4%bd%bf%e7%94%a8%e6%95%99%e8%82%b2%e9%82%ae%e7%ae%b1" aria-label="Anchor">#&lt;/a>
+style="text-decoration-line: none !important;" href="#%e7%bd%91%e7%ab%99%e8%b5%84%e6%ba%90%e9%97%ae%e9%a2%98" aria-label="Anchor">#&lt;/a>
 &lt;/span>
-&lt;/h1>
-&lt;p>目前的经验是，最好有一个教育邮箱绑定到自己的GitHub账号上，这样申请时选择教育邮箱再接个验证码认证一下，就可以直接进入提交材料的环节了&lt;/p>
-&lt;h1 class="relative group">使用dns加速
-&lt;div id="使用dns加速" class="anchor">&lt;/div>
+&lt;/h2>
+&lt;p>非常值得庆幸的是目前网站所有资源都在本地有备份，图床也是自己的，还在阿里云有个私人备份，但是由于链接的网址问题，后续如果换了域名就得全局修改，不过vscode有全局替换功能，就是不知道会不会出什么幺蛾子，目前来说网站的资源还是比较稳定的，至少本地都有留档&lt;/p></description></item><item><title>web-06 国内网络加速</title><link>https://godke.blog/posts/website/old/web-06-%E5%9B%BD%E5%86%85%E7%BD%91%E7%BB%9C%E5%8A%A0%E9%80%9F/</link><pubDate>Sat, 23 Mar 2024 17:51:31 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/website/old/web-06-%E5%9B%BD%E5%86%85%E7%BD%91%E7%BB%9C%E5%8A%A0%E9%80%9F/</guid><description>&lt;h2 class="relative group">开启cloudflare
+&lt;div id="开启cloudflare" class="anchor">&lt;/div>
 &lt;span
 class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 &lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-style="text-decoration-line: none !important;" href="#%e4%bd%bf%e7%94%a8dns%e5%8a%a0%e9%80%9f" aria-label="Anchor">#&lt;/a>
+style="text-decoration-line: none !important;" href="#%e5%bc%80%e5%90%afcloudflare" aria-label="Anchor">#&lt;/a>
 &lt;/span>
-&lt;/h1>
-&lt;p>有很多教程都说不能开加速器，因为会要求共享地理位置，但实际上加速也有很多类型
-这里推荐watt toolkit（原steam++）的host模式加速
-原理就是中国的墙实际上是对steam进行dns污染，如果你使用中国的dns服务，那多半会被拒绝访问
-但是也有很多dns服务是不墙steam的，比如cloudflare的，watt toolkit就支持让你直接使用指定的dns
-这样你的ip地址和其他信息并没有变，只是为你提供域名解析服务的服务商变了，是可以通过地理认证的&lt;/p>
-&lt;p>不过我直接用校园网访问，似乎没有问题&lt;/p>
-&lt;h1 class="relative group">提交材料
-&lt;div id="提交材料" class="anchor">&lt;/div>
+&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>打开cloudflare官网，照着提示做，把自己的域名交给cloudflare管理即可，选免费计划&lt;br>
+这里比较技术性的就只有修改自己域名的namesevers，这个得看你在哪买的域名&lt;br>
+总之cloudflare会为你提供两个namesever&lt;/p></description></item><item><title>web-05 自建图床</title><link>https://godke.blog/posts/website/old/web-05-%E8%87%AA%E5%BB%BA%E5%9B%BE%E5%BA%8A/</link><pubDate>Fri, 22 Mar 2024 11:33:37 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/website/old/web-05-%E8%87%AA%E5%BB%BA%E5%9B%BE%E5%BA%8A/</guid><description>&lt;h2 class="relative group">图床搭建
+&lt;div id="图床搭建" class="anchor">&lt;/div>
 &lt;span
 class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 &lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-style="text-decoration-line: none !important;" href="#%e6%8f%90%e4%ba%a4%e6%9d%90%e6%96%99" aria-label="Anchor">#&lt;/a>
+style="text-decoration-line: none !important;" href="#%e5%9b%be%e5%ba%8a%e6%90%ad%e5%bb%ba" aria-label="Anchor">#&lt;/a>
 &lt;/span>
-&lt;/h1>
-&lt;p>提交材料的初审是AI进行了，似乎只是检测一下有没有关键信息和材料的形式&lt;/p>
-&lt;p>目前的建议是&lt;/p>
-&lt;ul>
-&lt;li>填写好GitHub账号的各种信息，最好和你准备提交的材料强相关&lt;/li>
-&lt;li>填写好付款信息
-&lt;ul>
-&lt;li>这里注意一下最好不要填中国的地址，因为中国地址会禁止付款（中国政府规定的）&lt;/li>
-&lt;li>反正我的已经禁止付款了，而且修改不了，如果是外国地址后续还可以修改&lt;/li>
-&lt;li>不过不影响申请，还是能白嫖&lt;/li>
-&lt;/ul>
+&lt;/h2>
+&lt;ol>
+&lt;li>登录你的 Github 之后，创建一个新的仓库
+&lt;figure>
+&lt;img class="my-0 rounded-md" loading="lazy" alt="" src="https://pic3.zhimg.com/80/v2-bdae2009a14221c498dbde14714f951e_1440w.webp" />
+&lt;/figure>
 &lt;/li>
-&lt;li>设置好2FA，现在已经是强制要求了，可以用edge的插件，个人建议还是伪装成美国人，如果用edge插件一定要到插件设置页面做一个备份，2FA的恢复码也保存一下，不然你就会体验手机丢了要登录电脑微信的感觉
-&lt;ul>
-&lt;li>给你的某个设备（不能是华为）刷一个国际版安卓&lt;/li>
-&lt;li>安装代理和GMS&lt;/li>
-&lt;li>创建一个gmail&lt;/li>
-&lt;li>愉快地使用Google play&lt;/li>
-&lt;li>使用任意2FA软件，同步到云&lt;/li>
-&lt;/ul>
+&lt;li>填写仓库先关资料，一般只需要选一个合适的仓库名，然后确保仓库为 &lt;code>public&lt;/code> 其他的保持默认就好
+&lt;figure>
+&lt;img class="my-0 rounded-md" loading="lazy" alt="" src="https://pic4.zhimg.com/80/v2-79c5e7f0d53bf92b27ade85b244aadcf_1440w.webp" />
+&lt;/figure>
 &lt;/li>
-&lt;li>材料使用翻译过的学信网认证材料
-&lt;ul>
-&lt;li>学信网下载学籍验证报告
-&lt;ul>
-&lt;li>&lt;a href="https://my.chsi.com.cn/archive/bab/index.action" target="_blank">学信档案 (chsi.com.cn)&lt;/a>&lt;/li>
-&lt;/ul>
+&lt;li>一般创建成功之后，会出现如下界面，至此，我们的图床算是创建好了，接下来就是如何上传图片了；
+&lt;figure>
+&lt;img class="my-0 rounded-md" loading="lazy" alt="" src="https://pic3.zhimg.com/80/v2-569e9028620c1d14a8e92dc58647b506_1440w.webp" />
+&lt;/figure>
 &lt;/li>
-&lt;li>使用GitHub开源项目翻译报告
-&lt;ul>
-&lt;li>&lt;a href="https://github.com/Nagi-ovo/CHSI-Converter" target="_blank">Nagi-ovo/CHSI-Converter: 在线一键转化英文版学信档案 (github.com)&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>自己用word稍微调整一下格式然后做成pdf&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>一定要直接用手机拍，如果有条件可以把学生证和一卡通也拍进去，反正AI会检测各种信息
-&lt;ul>
-&lt;li>反正我是直接拍了报告就通过了&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;p>通过以后就是漫长的等待，似乎也不用自己主动领取，到账了直接上GitHub就能看到自己已经是GitHub Pro了&lt;/p></description></item></channel></rss>
+&lt;/ol>
+&lt;h2 class="relative group">上传图片
+&lt;div id="上传图片" class="anchor">&lt;/div>
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+style="text-decoration-line: none !important;" href="#%e4%b8%8a%e4%bc%a0%e5%9b%be%e7%89%87" aria-label="Anchor">#&lt;/a>
+&lt;/span>
+&lt;/h2>
+&lt;p>通过上面的步骤，我们的图床时搭建好了，但是通过传统的方法向 Github 上传图片太麻烦了，这里我们推荐使用一个开源图床工具 &lt;a href="https://link.zhihu.com/?target=https%3A//molunerfinn.com/PicGo/" target="_blank">PicGo&lt;/a> 来作为我们的图片上传工具；&lt;/p></description></item><item><title>web-02 Github deploy</title><link>https://godke.blog/posts/website/old/web-02-%E9%83%A8%E7%BD%B2%E7%BD%91%E9%A1%B5/</link><pubDate>Thu, 14 Mar 2024 17:40:59 +0800</pubDate><author>3601262198@qq.com (GodKe)</author><guid>https://godke.blog/posts/website/old/web-02-%E9%83%A8%E7%BD%B2%E7%BD%91%E9%A1%B5/</guid><description>&lt;p>网页放在本地服务器上肯定是毫无价值的，所以我们要将它发布到互联网上
+方法有很多，最方便的就是白嫖github pages，缺点就是只能部署静态网页
+后续可能会部署到树莓派上&lt;/p></description></item></channel></rss>
