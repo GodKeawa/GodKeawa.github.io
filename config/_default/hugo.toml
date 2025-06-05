@@ -9,6 +9,11 @@ disableLanguages       = []                    #to allow translation work requir
 
 # pluralizeListTitles = "true" # hugo function useful for non-english languages, find out more in  https://gohugo.io/getting-started/configuration/#pluralizelisttitles
 
+enableGitInfo= true
+[frontmatter]
+  lastmod = [':git', 'lastmod', ':fileModTime', 'date']
+
+
 enableRobotsTXT = false
 summaryLength   = 30
 hasCJKLanguage  = true

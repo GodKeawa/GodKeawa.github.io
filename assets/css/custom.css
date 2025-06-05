@@ -20,3 +20,14 @@
 .font-medium {
   font-size: 1.2rem !important;
 }
+
+.pageview-container {
+  display: flex;
+  justify-content: center;
+  /* Horizontally centers the group of items */
+  align-items: center;
+  /* Vertically centers the items */
+  gap: 8px;
+  /* Adds space between the icon and the text */
+  /* You can add padding or a defined width to .parent-container if needed */
+}
