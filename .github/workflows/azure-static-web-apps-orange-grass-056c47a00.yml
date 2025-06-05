@@ -33,13 +33,6 @@ jobs:
                const coredemo = require('@actions/core')
                return await coredemo.getIDToken()
            result-encoding: string
-           
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: 'latest'
-          extended: true
-          
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -54,6 +47,9 @@ jobs:
           app_build_command: "hugo --minify"
           github_id_token: ${{ steps.idtoken.outputs.result }}
           ###### End of Repository/Build Configurations ######
+        env:
+          HUGO_VERSION: 'latest'
+          HUGO_EXTENDED: 'true'
           
   deploy_github_pages: # 新增一个 job 用于 GitHub Pages 部署
     # 仅在 main 分支 push 时触发，并且确保上一个构建 job 成功
