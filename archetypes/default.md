@@ -1,6 +1,6 @@
 ---
-title: 
-date: 
+title: {{title}}
 draft: false
+date: {{date}}
 ---
 

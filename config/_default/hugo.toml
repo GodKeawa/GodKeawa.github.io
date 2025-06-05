@@ -9,10 +9,7 @@ disableLanguages       = []                    #to allow translation work requir
 
 # pluralizeListTitles = "true" # hugo function useful for non-english languages, find out more in  https://gohugo.io/getting-started/configuration/#pluralizelisttitles
 
-enableGitInfo= true
-[frontmatter]
-  lastmod = [':git', 'lastmod', ':fileModTime', 'date']
-
+enableGitInfo = true
 
 enableRobotsTXT = false
 summaryLength   = 30
@@ -24,6 +21,9 @@ buildFuture = false
 enableEmoji = true
 
 # googleAnalytics = "G-PEDMYR1V0K"
+
+[frontmatter]
+    lastmod = [':git', 'lastmod', ':fileModTime', 'date']
 
 [pagination]
     pagerSize = 102

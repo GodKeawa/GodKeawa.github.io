@@ -89,7 +89,7 @@
             <div class="min-w-0 min-h-0 max-w-fit">
 
                 {{ if .Params.articleexpired | default true}}
-                {{ partial "articleexpired.html" . }}
+                  {{ partial "articleexpired.html" . }}
                 {{ end }}
 
                 {{ partial "series/series.html" . }}
