@@ -37,6 +37,10 @@
     pageRef = "tags"
     weight  = 40
 
+[[main]]
+    name    = "AI"
+    pageRef = "ai"
+    weight  = 45
 
 [[main]]
     name    = "About"
@@ -46,6 +50,7 @@
 [[main]]
     name   = "MirrorSite"
     weight = 60
+
 
 [[main]]
     name   = "Github Pages"
