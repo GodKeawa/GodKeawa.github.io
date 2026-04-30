@@ -1,0 +1,24 @@
+/* 提升 PC 端的文章阅读展示宽度 */
+@media (min-width: 1024px) {
+
+  .lg\:px-32 {
+    padding-left: 4rem !important;  /* 原为 8rem */
+    padding-right: 4rem !important; /* 原为 8rem */
+  }
+
+  .prose {
+    max-width: 100% !important;
+  }
+
+  section.prose > div.max-w-fit {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    flex-grow: 1 !important; 
+  }
+
+  .max-w-prose {
+    max-width: 80rem !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
