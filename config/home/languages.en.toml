@@ -1,0 +1,26 @@
+disabled = false
+locale = "en"
+label = "English"
+weight = 1
+title = "GodKe.Dev"
+
+[params]
+  displayName = "EN"
+  isoCode = "en"
+  rtl = false
+  dateFormat = "2 January 2006"
+  # logo = "img/logo.png"
+  # secondaryLogo = "img/secondary-logo.png"
+  description = "GodKe's Develop Sites"
+  copyright   = "Copyleft © 2023 GodKe. No Rights Reserved."
+
+  [params.author]
+    name = "GodKe"
+    email = "3601262198@qq.com"
+    image = "img/logo.png"
+    imageQuality = 100
+    headline = "Just for Fun"
+    bio = "Just for Fun"
+    links = [
+      { github = "https://github.com/GodKeawa" }
+    ]

@@ -1,0 +1,10 @@
+# hugo-home.toml
+baseURL = "https://godke.dev/"
+publishDir = "public_home" 
+contentDir = "content_home" 
+staticDir = "static_home"
+
+theme = "blowfish"
+
+# 因为这是高度自定义的导航主页，通常不需要 RSS、分类、标签等
+disableKinds = ["taxonomy", "term", "rss", "section"]
