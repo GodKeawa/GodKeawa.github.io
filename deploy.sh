@@ -4,7 +4,7 @@ set -e
 
 echo -e "Starting deployment..."
 
-GITHUB_REPO=$(git@github.com:GodKeawa/GodKeawa.github.io.git)
+GITHUB_REPO="git@github.com:GodKeawa/GodKeawa.github.io.git"
 # 0. 同步代码到github
 git push $GITHUB_REPO master:master
 
